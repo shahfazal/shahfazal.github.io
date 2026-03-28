@@ -9,6 +9,6 @@ cover:
   relative: false
 ---
 
-Built an LSTM (Long Short-Term Memory) neural network to predict electric vehicle charger demand across New York City. The project involved processing large-scale spatial-temporal data, implementing one-hot encoding for categorical variables, and establishing a performance baseline using Facebook Prophet. I documented the end-to-end development—from data engineering to model architecture—to share my learning journey and insights.
+LSTM neural network predicting EV charger demand across NYC. Covers spatial-temporal data processing, one-hot encoding, and benchmarking against Facebook Prophet.
 
 [GitHub](https://github.com/shahfazal/nyc-ev-charger-model) • [Full write-up on Medium](https://medium.com/@shahfazal/teaching-a-machine-to-read-new-yorks-pulse-3491b04c64fe)

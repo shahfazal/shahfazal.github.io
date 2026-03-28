@@ -9,6 +9,6 @@ cover:
   relative: false
 ---
 
-Developed TinyNet, a lightweight deep learning framework built entirely from scratch in Python and NumPy. This project bypasses high-level libraries like PyTorch or TensorFlow to implement core components—including backpropagation, custom activation functions (ReLU, Sigmoid), and various optimization layers—manually. It serves as a transparent laboratory for understanding the calculus and linear algebra that power modern artificial intelligence.
+A deep learning framework built from scratch in Python and NumPy — backpropagation, activation functions, and optimizers implemented manually, without PyTorch or TensorFlow.
 
 [GitHub](https://github.com/shahfazal/hello-neural-world) • [Full write-up on Medium](https://medium.com/@shahfazal/tinynet-the-story-of-a-neural-nudge-7de8def8aacd)

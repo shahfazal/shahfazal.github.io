@@ -6,12 +6,27 @@ paginate = 10
 
 [params]
   author = 'Fazal'
-  description = 'ML, Open Data, and building things in public.'
-  homeInfoParams.Title = 'Shahfazal Mohammed'
-  homeInfoParams.Content = '20 years of Enterprise Engineering, now tinkering and building Neural Nets. Learning in public.'
+  description = 'ML, Open Data, learning and building things in public.'
+[params.profileMode]
+  enabled = true
+  title = "Shahfazal Mohammed"
+  subtitle = "20 years in deterministic software engineering. Now learning what happens when the rules aren't explicit. Building neural nets, and agent evals — in public."
+[[params.profileMode.buttons]]
+  name = "View Projects"
+  url = "/projects/"
   ShowReadingTime = true
   ShowPostNavLinks = true
   ShowBreadCrumbs = true
+  ShowSocialICons = true
+  [[params.socialIcons]]
+    name = "github"
+    url = "https://github.com/shahfazal"
+  [[params.socialIcons]]
+    name = "medium"
+    url = "https://medium.com/@shahfazal"
+  [[params.socialIcons]]
+    name = "linkedin"
+    url = "https://linkedin.com/in/shahfazalmohammed"
 
 [menu]
   [[menu.main]]

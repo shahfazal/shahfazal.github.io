@@ -1,0 +1,28 @@
+baseURL = 'https://shahfazal.com/'
+languageCode = 'en-us'
+title = 'Shahfazal'
+theme = 'PaperMod'
+paginate = 10
+
+[params]
+  author = 'Fazal'
+  description = 'ML, Open Data, and building things in public.'
+  homeInfoParams.Title = 'Shahfazal Mohammed'
+  homeInfoParams.Content = '20 years of Enterprise Engineering, now tinkering and building Neural Nets. Learning in public.'
+  ShowReadingTime = true
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+
+[menu]
+  [[menu.main]]
+    name = 'Projects'
+    url = '/projects/'
+    weight = 1
+  [[menu.main]]
+    name = 'Writing'
+    url = '/posts/'
+    weight = 2
+  [[menu.main]]
+    name = 'About'
+    url = '/about/'
+    weight = 3

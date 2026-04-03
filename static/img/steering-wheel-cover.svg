@@ -1,0 +1,113 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bg" cx="600" cy="255" r="520" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#1e1b4b"/>
+      <stop offset="52%"  stop-color="#0f0d2e"/>
+      <stop offset="100%" stop-color="#070711"/>
+    </radialGradient>
+
+    <!-- Soft glow on wheel elements -->
+    <filter id="glow" x="-25%" y="-25%" width="150%" height="150%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Halo behind the whole wheel -->
+    <filter id="halo" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="18" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!--
+      PCB trace tile (50×50, userSpaceOnUse so it tiles in canvas coords).
+      Each tile has:
+        • crossing horizontal + vertical traces
+        • a ring-via at the intersection
+        • one L-shaped branch on each half with a small SMD pad
+    -->
+    <pattern id="pcb" x="0" y="0" width="50" height="50" patternUnits="userSpaceOnUse">
+      <!-- main traces -->
+      <line x1="0"  y1="25" x2="50" y2="25" stroke="#a5b4fc" stroke-width="1"/>
+      <line x1="25" y1="0"  x2="25" y2="50" stroke="#a5b4fc" stroke-width="1"/>
+      <!-- ring via -->
+      <circle cx="25" cy="25" r="3.2" fill="none" stroke="#a5b4fc" stroke-width="1"/>
+      <circle cx="25" cy="25" r="1.3" fill="#a5b4fc"/>
+      <!-- upper-left branch -->
+      <line x1="2"  y1="10" x2="13" y2="10" stroke="#a5b4fc" stroke-width="0.8"/>
+      <line x1="13" y1="10" x2="13" y2="25" stroke="#a5b4fc" stroke-width="0.8"/>
+      <circle cx="13" cy="10" r="1.5" fill="#a5b4fc"/>
+      <rect x="1" y="7" width="5" height="6" rx="1" fill="#a5b4fc"/>
+      <!-- lower-right branch -->
+      <line x1="48" y1="40" x2="37" y2="40" stroke="#a5b4fc" stroke-width="0.8"/>
+      <line x1="37" y1="40" x2="37" y2="25" stroke="#a5b4fc" stroke-width="0.8"/>
+      <circle cx="37" cy="40" r="1.5" fill="#a5b4fc"/>
+      <rect x="44" y="37" width="5" height="6" rx="1" fill="#a5b4fc"/>
+    </pattern>
+  </defs>
+
+  <!-- ── Background ─────────────────────────────────── -->
+  <rect width="1200" height="630" fill="#070711"/>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- ── Circuit texture (fills wheel disc at low opacity) ── -->
+  <circle cx="600" cy="255" r="197" fill="url(#pcb)" opacity="0.17"/>
+
+  <!-- ── Wheel halo (soft blurred copy behind) ─────── -->
+  <g opacity="0.30" filter="url(#halo)">
+    <circle cx="600" cy="255" r="200" stroke="#6366f1" stroke-width="15" fill="none"/>
+    <!-- top spoke -->
+    <line x1="600" y1="220" x2="600" y2="55"  stroke="#6366f1" stroke-width="11" stroke-linecap="round"/>
+    <!-- lower-right spoke (30°) -->
+    <line x1="630" y1="273" x2="773" y2="355" stroke="#6366f1" stroke-width="11" stroke-linecap="round"/>
+    <!-- lower-left spoke (150°) -->
+    <line x1="570" y1="273" x2="427" y2="355" stroke="#6366f1" stroke-width="11" stroke-linecap="round"/>
+  </g>
+
+  <!-- ── Steering wheel ─────────────────────────────── -->
+  <!-- Outer ring -->
+  <circle cx="600" cy="255" r="200"
+          stroke="#6366f1" stroke-width="13" fill="none"
+          filter="url(#glow)"/>
+
+  <!-- Spokes -->
+  <line x1="600" y1="220" x2="600" y2="55"
+        stroke="#6366f1" stroke-width="9" stroke-linecap="round" filter="url(#glow)"/>
+  <line x1="630" y1="273" x2="773" y2="355"
+        stroke="#6366f1" stroke-width="9" stroke-linecap="round" filter="url(#glow)"/>
+  <line x1="570" y1="273" x2="427" y2="355"
+        stroke="#6366f1" stroke-width="9" stroke-linecap="round" filter="url(#glow)"/>
+
+  <!-- Hub ring -->
+  <circle cx="600" cy="255" r="35"
+          fill="#0f0d2e" stroke="#6366f1" stroke-width="9"
+          filter="url(#glow)"/>
+  <!-- Hub centre fill -->
+  <circle cx="600" cy="255" r="15" fill="#6366f1" opacity="0.78"/>
+
+  <!-- ── Typography ─────────────────────────────────── -->
+  <!-- Thin rule -->
+  <line x1="270" y1="504" x2="930" y2="504"
+        stroke="#6366f1" stroke-width="1" opacity="0.28"/>
+
+  <!-- "NOBODY TESTS THE" — light, spaced caps -->
+  <text x="600" y="543"
+        font-family="system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif"
+        font-size="25" font-weight="300"
+        fill="#6b7db3"
+        text-anchor="middle"
+        letter-spacing="8">NOBODY TESTS THE</text>
+
+  <!-- "Steering Wheel" — bold, prominent -->
+  <text x="600" y="597"
+        font-family="system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif"
+        font-size="54" font-weight="700"
+        fill="#e2e8f0"
+        text-anchor="middle"
+        letter-spacing="-0.5">Steering Wheel</text>
+</svg>

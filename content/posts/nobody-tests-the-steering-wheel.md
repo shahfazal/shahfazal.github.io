@@ -65,5 +65,5 @@ This will become a three-part series:
 2. **Observe before you eval** — why you can't write good invariants until you've watched the skill run
 3. **The eval-generator** — a skill that reads a SKILL.md and writes your test cases
 
-If this resonates — or if you're already doing something similar — I'd love to hear about it. Find me on [LinkedIn](https://linkedin.com/in/shahfazal) or
+If this resonates — or if you're already doing something similar — I'd love to hear about it. Find me on [LinkedIn](https://linkedin.com/in/shahfazalmohammed) or
 [GitHub](https://github.com/shahfazal).

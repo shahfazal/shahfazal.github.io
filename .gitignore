@@ -1,2 +1,20 @@
+# Hugo
 public/
+resources/_gen/
 .hugo_build.lock
+
+# PaperMod
+assets/jsconfig.json
+
+# macOS
+.DS_Store
+
+# Editor
+.vscode/
+.idea/
+
+# Environment
+.env
+
+# Claude
+.claude/

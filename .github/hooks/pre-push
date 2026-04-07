@@ -1,0 +1,29 @@
+#!/bin/sh
+
+FILE="static/elections-municipales-2026/index.html"
+
+if [ -f "$FILE" ]; then
+  if ! grep -q 'const DATA = "./data/";' "$FILE"; then
+    echo "ERROR: DATA in $FILE is not set to \"./data/\" — aborting push."
+    echo "Run: grep 'const DATA' $FILE"
+    exit 1
+  fi
+fi
+
+# ── File size check ───────────────────────────────────────────────────────────
+LIMIT_KB=275
+LARGE_FILES=$(find static -type f | while read f; do
+  size=$(wc -c < "$f" | tr -d ' ')
+  size_kb=$(( size / 1024 ))
+  if [ "$size_kb" -gt "$LIMIT_KB" ]; then
+    echo "  $f (${size_kb}K)"
+  fi
+done)
+
+if [ -n "$LARGE_FILES" ]; then
+  echo "ERROR: Files over ${LIMIT_KB}K — compress before pushing:"
+  echo "$LARGE_FILES"
+  exit 1
+fi
+
+exit 0

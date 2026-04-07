@@ -28,6 +28,9 @@ paginate = 10
     name = "linkedin"
     url = "https://linkedin.com/in/shahfazalmohammed"
 
+[markup.goldmark.renderer]
+  unsafe = true
+
 [menu]
   [[menu.main]]
     name = 'Projects'

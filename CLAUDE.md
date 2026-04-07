@@ -50,7 +50,7 @@ markdown file → git push → GitHub Actions builds Hugo → GitHub Pages → s
 
 ## Git hooks
 
-- Pre-push hook at `.github/hooks/pre-push` — blocks push if `const DATA` in `static/elections-municipales-2026/index.html` is not exactly `"./data/"`
+- Pre-push hook at `.github/hooks/pre-push` — blocks push if `const DATA` in `static/elections-municipales-2026/elections-municipales-2026.js` is not exactly `"./data/"`
 - One-time local setup required: `git config core.hooksPath .github/hooks`
 
 ## Hugo setup status (as of March 27 2026)

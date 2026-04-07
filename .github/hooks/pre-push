@@ -1,6 +1,6 @@
 #!/bin/sh
 
-FILE="static/elections-municipales-2026/index.html"
+FILE="static/elections-municipales-2026/elections-municipales-2026.js"
 
 if [ -f "$FILE" ]; then
   if ! grep -q 'const DATA = "./data/";' "$FILE"; then

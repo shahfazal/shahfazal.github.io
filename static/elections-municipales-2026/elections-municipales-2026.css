@@ -36,7 +36,7 @@
         top: 0;
       }
 
-      /* Global focus-visible ring — keyboard users only, no mouse outline.
+      /* Global focus-visible ring: keyboard users only, no mouse outline.
          Scoped to our own interactive elements; Leaflet/Plotly/Driver.js
          retain their default outlines so keyboard users can navigate them. */
       .viz-tab:focus,
@@ -64,7 +64,7 @@
         outline-offset: 2px;
       }
 
-      /* Welcome step — wider landscape layout */
+      /* Welcome step: wider landscape layout */
       .driver-popover.tour-welcome {
         min-width: 520px;
         max-width: 560px;
@@ -81,7 +81,7 @@
         padding: 0;
       }
 
-      /* ── Content wrapper — white card centered on dark body ─────────────────── */
+      /* ── Content wrapper: white card centered on dark body ─────────────────── */
 
       .viz-content {
         position: relative;
@@ -193,7 +193,7 @@
         border-radius: 4px;
       }
 
-      /* Compact tooltip — matches the dark card aesthetic */
+      /* Compact tooltip: matches the dark card aesthetic */
       .leaflet-tooltip {
         background: #1a1a1a;
         border: 1px solid #333;
@@ -611,7 +611,7 @@
 
       .load-error {
         padding: 24px;
-        color: #b00000; /* #b00000 on #fff = 5.1:1 — passes AA */
+        color: #b00000; /* #b00000 on #fff = 5.1:1, passes AA */
       }
 
       /* ── Tour help button ────────────────────────────────────────────────────── */

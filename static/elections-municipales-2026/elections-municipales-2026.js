@@ -27,7 +27,7 @@
 
       const BLOC_ORDER = ["EXG", "GAU", "CENT", "DIV", "DTE", "EXD"];
 
-      // Shared hovertemplate — referenced in buildTraces() and restored by applySelection()
+      // Shared hovertemplate: referenced in buildTraces() and restored by applySelection()
       // Indices match CD object below: NOM=0, BLOC_LABEL=1, TRANSACTIONS=4, PRIX_FR=5, ABS_FR=6
       const HOVER_TEMPLATE =
         "<b>%{customdata[0]}</b><br>" +
@@ -37,7 +37,7 @@
         "Transactions : %{customdata[4]}" +
         "<extra></extra>";
 
-      // Named indices for customdata arrays — avoids magic numbers throughout
+      // Named indices for customdata arrays: avoids magic numbers throughout
       // PRIX_FR / ABS_FR are pre-formatted French strings used in hover and pinned tooltip
       const CD = {
         NOM: 0,
@@ -118,7 +118,7 @@
         )
           initBoxPlot();
 
-        // Tear down PLM maps — re-init with new year data on next visit
+        // Tear down PLM maps: re-init with new year data on next visit
         Object.keys(plmMaps).forEach((city) => {
           plmMaps[city].remove();
           delete plmMaps[city];
@@ -204,7 +204,7 @@
               }),
             ]),
             hovertemplate: HOVER_TEMPLATE,
-            // selected/unselected styles — not affected by legend rendering
+            // selected/unselected styles: not affected by legend rendering
             selected: { marker: { opacity: 1, size: 14 } },
             unselected: { marker: { opacity: 0.08, size: 8 } },
             marker: {
@@ -233,10 +233,10 @@
             showgrid: true,
             gridcolor: "#e8e8e8",
             zeroline: false,
-            // Explicit ticks — avoids Plotly log-axis offset artefact and enforces French spacing
+            // Explicit ticks: avoids Plotly log-axis offset artefact and enforces French spacing
             tickmode: "array",
             tickvals: [500, 1000, 2000, 3000, 5000, 7000, 10000, 15000],
-            // \u00a0 = non-breaking space — more reliably rendered in SVG than \u202f
+            // \u00a0 = non-breaking space, more reliably rendered in SVG than \u202f
             ticktext: [
               "500",
               "1\u00a0000",
@@ -317,13 +317,13 @@
           item.appendChild(label);
           container.appendChild(item);
 
-          // Legend items are toggle buttons — keyboard and mouse both activate
+          // Legend items are toggle buttons: keyboard and mouse both activate
           item.setAttribute("role", "button");
           item.setAttribute("tabindex", "0");
           item.setAttribute("aria-pressed", "false");
 
           function toggleBloc() {
-            // Block legend filter when a point or search pill is active —
+            // Block legend filter when a point or search pill is active:
             // pulse reinit so user knows to reset first
             if (clickedCommune !== null || searchedCommunes.size > 0) {
               pulseResetBtn();
@@ -389,12 +389,12 @@
 
         const resetBtn = document.getElementById("reset-btn");
         resetBtn.classList.toggle("visible", hasAny);
-        // Keep aria-hidden + tabindex in sync — hidden button must not be focusable
+        // Keep aria-hidden + tabindex in sync: hidden button must not be focusable
         resetBtn.setAttribute("aria-hidden", hasAny ? "false" : "true");
         resetBtn.tabIndex = hasAny ? 0 : -1;
 
         if (!hasAny) {
-          // Reset: restore all traces to full hover — both properties must be reset together
+          // Reset: restore all traces to full hover, both properties must be reset together
           Plotly.restyle(
             CHART_ID,
             {
@@ -425,7 +425,7 @@
             spValues.push([]);
             unselectedOpacity.push(OPACITY.DIM);
             unselectedSize.push(8);
-            // Both must be set together — hovertemplate overrides hoverinfo when present,
+            // Both must be set together: hovertemplate overrides hoverinfo when present,
             // so clearing hovertemplate alone falls back to raw x/y tooltip; 'skip' alone
             // is ignored when hovertemplate is set. Together they fully suppress hover.
             hoverTemplateValues.push(false);
@@ -434,7 +434,7 @@
           }
 
           if (!hasCommunes) {
-            // Bloc active via legend filter only — all points full
+            // Bloc active via legend filter only: all points full
             spValues.push(null);
             unselectedOpacity.push(OPACITY.DIM);
             unselectedSize.push(8);
@@ -478,7 +478,7 @@
       function attachChartEvents() {
         const chartEl = document.getElementById(CHART_ID);
 
-        // plotly_click fires before the native click event — flag lets the background
+        // plotly_click fires before the native click event: flag lets the background
         // handler know not to pulse when the click actually landed on a point.
         let lastClickWasPoint = false;
 
@@ -488,7 +488,7 @@
           const pt = e.points[0];
           if (!pt || !pt.customdata) return;
 
-          // Block all point clicks when a legend filter is active — the two modes don't compose
+          // Block all point clicks when a legend filter is active: the two modes don't compose
           if (filteredBlocs.size > 0) return;
 
           const nom = pt.customdata[CD.NOM];
@@ -498,7 +498,7 @@
             Plotly.relayout(CHART_ID, { hovermode: "closest" });
           } else {
             clickedCommune = nom;
-            // Use the actual mouse position — d2p + _offset drifts on log axes
+            // Use the actual mouse position: d2p + _offset drifts on log axes
             const chartRect = chartEl.getBoundingClientRect();
             const pixelPos = {
               x: e.event.clientX - chartRect.left,
@@ -510,7 +510,7 @@
           applySelection();
         });
 
-        // Legend interaction handled by custom HTML legend — no Plotly legend events needed
+        // Legend interaction handled by custom HTML legend: no Plotly legend events needed
 
         // Background click: no reset (↺ is the sole reset path), but pulse the button
         // so the user discovers it when they click expecting something to happen.
@@ -531,7 +531,7 @@
       const pinnedTooltip = document.getElementById("pinned-tooltip");
 
       // Convert data coordinates to pixel position within the chart div.
-      // Uses d2p (data-to-pixel) which handles log scale internally — no manual Math.log10.
+      // Uses d2p (data-to-pixel) which handles log scale internally: no manual Math.log10.
       // _offset is the axis margin (distance from SVG edge to plot area edge).
       function dataToPixel(prix, abstention) {
         const chartEl = document.getElementById(CHART_ID);
@@ -587,7 +587,7 @@
         });
       }
 
-      // pixelPos optional — from click event; falls back to dataToPixel.
+      // pixelPos optional: from click event; falls back to dataToPixel.
       function showPinnedTooltip(cd, pixelPos) {
         positionTooltip(pinnedTooltip, cd, pixelPos);
         pinnedTooltip.hidden = false;
@@ -605,7 +605,7 @@
           .forEach((el) => el.remove());
       }
 
-      // One pinned tooltip per searched commune. hovermode stays false — background dead.
+      // One pinned tooltip per searched commune. hovermode stays false: background dead.
       function showSearchTooltips() {
         clearSearchTooltips();
         const chartWrapper = document.querySelector(".chart-wrapper");
@@ -633,7 +633,7 @@
         );
       }
 
-      // Find customdata for a commune by name — used to show tooltip after search-select
+      // Find customdata for a commune by name: used to show tooltip after search-select
       function findCustomdata(nom) {
         for (const bloc of BLOC_ORDER) {
           const d = traceData[bloc].find((p) => p.nom_commune === nom);
@@ -704,14 +704,14 @@
       // ── Tour toggle ─────────────────────────────────────────────────────────────
 
       function setTour(tour) {
-        // No-op if already on this tour — prevents resetAll() wiping user's selection
+        // No-op if already on this tour: prevents resetAll() wiping user's selection
         const currentlyActive =
           tour === 1
             ? document.getElementById("btn-tour1").classList.contains("active")
             : document.getElementById("btn-tour2").classList.contains("active");
         if (currentlyActive) return;
 
-        // Clear all selection state before switching — prevents tooltip floating over overlay
+        // Clear all selection state before switching: prevents tooltip floating over overlay
         resetAll();
         const btn1 = document.getElementById("btn-tour1");
         const btn2 = document.getElementById("btn-tour2");
@@ -778,10 +778,10 @@
                 // Explicit arrow-key selection
                 selectCommune(items[highlightedIdx].textContent);
               } else if (items.length === 1) {
-                // Single match — auto-select without needing to arrow down
+                // Single match: auto-select without needing to arrow down
                 selectCommune(items[0].textContent);
               } else if (items.length > 1) {
-                // Multiple matches — auto-select only if input is an exact match
+                // Multiple matches: auto-select only if input is an exact match
                 const exact = input.value.trim();
                 const exactMatch = [...items].find(
                   (el) =>
@@ -825,7 +825,7 @@
           msg.className = "autocomplete-empty";
           msg.setAttribute("role", "status");
           msg.textContent =
-            "Commune non trouvée dans les résultats du 2ème tour — peut-être élue au 1er tour ? (les visualisations dispo bientôt)";
+            "Commune non trouvée dans les résultats du 2ème tour : peut-être élue au 1er tour ? (les visualisations dispo bientôt)";
           dropdown.innerHTML = "";
           dropdown.appendChild(msg);
           dropdown.classList.add("open");
@@ -945,7 +945,7 @@
           prevBtnText: "← Précédent",
           doneBtnText: "Terminer",
           allowClose: true,
-          // Full cleanup on exit — covers both "Terminer" and the × close button
+          // Full cleanup on exit: covers both "Terminer" and the × close button
           onDestroyed: () => {
             localStorage.setItem("elections-tour-completed", "true");
             cleanupInput();
@@ -954,7 +954,7 @@
           },
           steps: [
             {
-              // No element — centered modal for the welcome step; Lyon still pre-selected via hook
+              // No element: centered modal for the welcome step; Lyon still pre-selected via hook
               popover: {
                 popoverClass: "tour-welcome",
                 title: "Bienvenue sur la visualisation",
@@ -969,10 +969,10 @@
             {
               element: "#year-toggle-bar",
               popover: {
-                title: "Données DVF — 2024 ou 2025 ?",
+                title: "Données DVF : 2024 ou 2025 ?",
                 description:
                   "Bascule entre les prix immobiliers DVF <b>2024</b> et <b>2025</b> pour vérifier si la corrélation tient dans les deux années.<br><br>" +
-                  "S'applique aux onglets <b>Prix &amp; abstention</b> et <b>Distribution par bloc</b> — filtres et sélections actifs sont conservés. Désactivé sur Paris-Lyon-Marseille (variations minimes à l'échelle des arrondissements).",
+                  "S'applique aux onglets <b>Prix &amp; abstention</b> et <b>Distribution par bloc</b> : filtres et sélections actifs sont conservés. Désactivé sur Paris-Lyon-Marseille (variations minimes à l'échelle des arrondissements).",
                 side: "bottom",
                 align: "start",
               },
@@ -982,9 +982,9 @@
               popover: {
                 title: "Trois visualisations",
                 description:
-                  "<b>Prix &amp; abstention</b> — un point par commune, couleur = bloc gagnant.<br>" +
-                  "<b>Distribution par bloc</b> — boîtes à moustaches des prix par bloc politique.<br>" +
-                  "<b>Paris-Lyon-Marseille</b> — analyse par arrondissement pour les trois grandes villes.<br><br>" +
+                  "<b>Prix &amp; abstention</b> : un point par commune, couleur = bloc gagnant.<br>" +
+                  "<b>Distribution par bloc</b> : boîtes à moustaches des prix par bloc politique.<br>" +
+                  "<b>Paris-Lyon-Marseille</b> : analyse par arrondissement pour les trois grandes villes.<br><br>" +
                   "Le bouton <b>?</b> lance un guide spécifique à chaque onglet.",
                 side: "bottom",
                 align: "start",
@@ -1096,7 +1096,7 @@
 
       function launchPLMTour() {
         const { driver } = window.driver.js;
-        // Target the currently-visible map panel — avoids anchoring to a hidden element
+        // Target the currently-visible map panel: avoids anchoring to a hidden element
         const activeCity =
           document.querySelector("[data-plm].active")?.dataset.plm || "paris";
         driver({
@@ -1127,7 +1127,7 @@
                 description:
                   "Chaque carte combine deux lectures :<ul style='margin:.5em 0 0 1.2em;line-height:1.7'>" +
                   "<li><b>Couleur de fond</b> : bloc politique vainqueur au 2ème tour.</li>" +
-                  "<li><b>Taille du cercle</b> : prix médian au m² — plus le cercle est grand, plus l'arrondissement est cher.</li>" +
+                  "<li><b>Taille du cercle</b> : prix médian au m², plus le cercle est grand, plus l'arrondissement est cher.</li>" +
                   `<li><b>Info-bulle</b> : prix, abstention, transactions DVF ${activeYear}.</li></ul>` +
                   "<em>Survoles un arrondissement ou un cercle pour voir ses détails.</em>",
               },
@@ -1192,7 +1192,7 @@
             y: prices,
             x: Array(prices.length).fill(label),
             text: communeText,
-            // hovertemplate applies to outlier scatter points only — %{text} and %{y}
+            // hovertemplate applies to outlier scatter points only: %{text} and %{y}
             // work fine here. Box summary stats use Plotly's built-in hover (not affected).
             hovertemplate: "%{text}<extra></extra>",
             marker: { color },
@@ -1289,7 +1289,7 @@
 
       const TAB_BLURBS = {
         scatter:
-          "Un point par commune — 2ème tour du 22 mars 2026. Comment les prix immobiliers et les taux d'abstention varient-ils selon le bloc vainqueur\u00a0?",
+          "Un point par commune : 2ème tour du 22 mars 2026. Comment les prix immobiliers et les taux d'abstention varient-ils selon le bloc vainqueur\u00a0?",
         boxplot:
           "Distribution des prix au m² par bloc politique vainqueur au 2ème tour. Les communes les plus chères votent-elles différemment\u00a0?",
         plm: "Résultats du 2ème tour et prix au m² par arrondissement dans les trois plus grandes villes de France. Choisis une ville.",
@@ -1345,14 +1345,14 @@
           );
         document.getElementById("plm-blurb").textContent =
           PLM_BLURBS[city] || "";
-        // Lazy init — only when PLM panel is actually visible (display:block)
+        // Lazy init: only when PLM panel is actually visible (display:block)
         // Guard prevents init into hidden 0×0 container (Leaflet zooms to maxZoom)
         const plmPanelActive = document
           .getElementById("panel-plm")
           .classList.contains("active");
         setTimeout(() => {
           if (plmMaps[city]) {
-            // Only invalidateSize — fitBounds would reset any manual zoom/pan the user did
+            // Only invalidateSize: fitBounds would reset any manual zoom/pan the user did
             plmMaps[city].invalidateSize();
           } else if (plmPanelActive) {
             initPLMMap(city);
@@ -1422,7 +1422,7 @@
           const normPrix = (v) =>
             prixMax > prixMin ? (v - prixMin) / (prixMax - prixMin) : 0.5;
 
-          // Tooltip builder — shared between polygons and circles
+          // Tooltip builder: shared between polygons and circles
           function tooltipHtml(feature) {
             const secteur = arrdtToSecteur[feature.properties.code];
             const nom = feature.properties.nom;
@@ -1459,7 +1459,7 @@
           if (!geoResp.ok)
             throw new Error(`geo.api.gouv.fr HTTP ${geoResp.status}`);
           const raw = await geoResp.json();
-          // Filter out features with null/missing geometry — geo.api.gouv.fr occasionally
+          // Filter out features with null/missing geometry: geo.api.gouv.fr occasionally
           // returns null geometry for arrondissements (causes Leaflet _clipPoints crash)
           const geojson = {
             ...raw,
@@ -1494,7 +1494,7 @@
             },
           ).addTo(map);
 
-          // Choropleth — solid bloc colour
+          // Choropleth: solid bloc colour
           const geoLayer = L.geoJSON(geojson, {
             style: (feature) => {
               const secteur = arrdtToSecteur[feature.properties.code];
@@ -1522,7 +1522,7 @@
             },
           }).addTo(map);
 
-          // Vertex-average centroid — more accurate than bounding-box center for
+          // Vertex-average centroid: more accurate than bounding-box center for
           // coastal/irregular polygons (e.g. Marseille arrondissements with islands)
           function geoCentroid(feature) {
             const geom = feature.geometry;
@@ -1537,7 +1537,7 @@
             return L.latLng(lat, lng);
           }
 
-          // Proportional circles — radius ∝ prix médian au m² (7 → 24 px)
+          // Proportional circles: radius ∝ prix médian au m² (7 → 24 px)
           geoLayer.eachLayer((layer) => {
             const secteur = arrdtToSecteur[layer.feature.properties.code];
             if (!secteur?.median_prix_m2) return;
@@ -1561,7 +1561,7 @@
 
           // ── City-level winner badge ───────────────────────────────────────────────
           // Derive from secteur data: plurality bloc by secteur count
-          // Count by arrondissement polygons (not secteurs) — SR01 covers 4 arrondissements
+          // Count by arrondissement polygons (not secteurs): SR01 covers 4 arrondissements
           const blocCount = {};
           let totalArrdts = 0;
           citySecteurs.forEach((s) => {

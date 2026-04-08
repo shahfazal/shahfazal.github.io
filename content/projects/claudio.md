@@ -1,5 +1,5 @@
 ---
-title: "Claudio — A Local Session Browser for Claude Code"
+title: "Claudio: A Local Session Browser for Claude Code"
 description: "I lost a Claude Code session. So I built a tool to find it."
 date: 2026-04-03
 tags: ["Python", "Flask", "Claude Code", "Open Source"]
@@ -20,8 +20,8 @@ So I built [Claudio](https://github.com/shahfazal/claudio).
 
 ## What it does
 
-Claudio is a local web app that reads `~/.claude/` — the same directory Claude
-Code writes to — and presents all your sessions as a browsable, searchable list.
+Claudio is a local web app that reads `~/.claude/` (the same directory Claude
+Code writes to) and presents all your sessions as a browsable, searchable list.
 
 No cloud. No sync. No accounts. It never makes a network call.
 
@@ -54,7 +54,7 @@ immediately once Claudio was running. Worktree gone, session intact.
 - Python, Flask, uv
 - Zero external dependencies beyond Flask
 - Dark / light / system theme, tile or row layout, live search, click-to-copy project path header
-- `uv run claudio` — that's it
+- `uv run claudio` - that's it
 
 ## Get it
 

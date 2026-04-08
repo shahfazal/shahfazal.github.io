@@ -12,6 +12,6 @@ My current obsession is the Speedmaster FOIS ref: 310.30.40.50.06.001 (Blue on B
 
 Precision is precision, whether it's a movement or a model.
 
-Currently building in public — neural nets, French open data visualisations, and agent evaluation frameworks. All the code is on GitHub.
+Currently building in public: neural nets, French open data visualisations, and agent evaluation frameworks. All the code is on GitHub.
 
 [GitHub](https://github.com/shahfazal) · [LinkedIn](https://linkedin.com/in/shahfazalmohammed) · [HuggingFace](https://huggingface.co/shahfazal) · [Medium](https://medium.com/@shahfazal)

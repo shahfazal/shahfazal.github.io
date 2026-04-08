@@ -62,6 +62,7 @@
       // then call applySelection(). Nothing else writes to these variables.
 
       let traceData = {}; // bloc → array of data points (set once in init)
+      let communeNames = []; // populated in init, used by scatter lazy-init
 
       let clickedCommune = null; // single commune from point click (null = none)
       const searchedCommunes = new Set(); // multi-select from search bar
@@ -118,6 +119,13 @@
         )
           initBoxPlot();
 
+        // Reset quintile chart similarly
+        quintileReady = false;
+        if (
+          document.getElementById("panel-quintile").classList.contains("active")
+        )
+          initQuintileChart();
+
         // Tear down PLM maps: re-init with new year data on next visit
         Object.keys(plmMaps).forEach((city) => {
           plmMaps[city].remove();
@@ -155,25 +163,41 @@
           traceData[b].push(d);
         });
 
-        const communeNames = [...new Set(data.map((d) => d.nom_commune))].sort(
+        communeNames = [...new Set(data.map((d) => d.nom_commune))].sort(
           (a, b) => a.localeCompare(b, "fr", { sensitivity: "base" }),
         );
 
-        Plotly.newPlot(CHART_ID, buildTraces(), buildLayout(), buildConfig());
-
-        buildCustomLegend();
-
-        // Attach all event listeners exactly once, after the chart exists
-        attachChartEvents();
+        // UI events (search, tabs, year toggle) wired up regardless of active tab
         attachUIEvents(communeNames);
 
-        // Tour: small delay so chart has fully painted before step 1 highlights it
+        // Render whichever tab is active on landing
+        if (
+          document.getElementById("panel-scatter").classList.contains("active")
+        ) {
+          initScatterPlot();
+        } else if (
+          document.getElementById("panel-quintile").classList.contains("active")
+        ) {
+          initQuintileChart();
+        }
+
+        // Tour: small delay so active chart has fully painted
         setTimeout(() => {
           document
             .getElementById("tour-help-btn")
             .addEventListener("click", launchTour);
           if (!localStorage.getItem("elections-tour-completed")) launchTour();
         }, 600);
+      }
+
+      let scatterReady = false;
+
+      function initScatterPlot() {
+        if (scatterReady) return;
+        scatterReady = true;
+        Plotly.newPlot(CHART_ID, buildTraces(), buildLayout(), buildConfig());
+        buildCustomLegend();
+        attachChartEvents();
       }
 
       // ── Trace builder ───────────────────────────────────────────────────────────
@@ -967,30 +991,6 @@
               onDeselected: () => resetAll(),
             },
             {
-              element: "#year-toggle-bar",
-              popover: {
-                title: "Données DVF : 2024 ou 2025 ?",
-                description:
-                  "Bascule entre les prix immobiliers DVF <b>2024</b> et <b>2025</b> pour vérifier si la corrélation tient dans les deux années.<br><br>" +
-                  "S'applique aux onglets <b>Prix &amp; abstention</b> et <b>Distribution par bloc</b> : filtres et sélections actifs sont conservés. Désactivé sur Paris-Lyon-Marseille (variations minimes à l'échelle des arrondissements).",
-                side: "bottom",
-                align: "start",
-              },
-            },
-            {
-              element: ".viz-tabs",
-              popover: {
-                title: "Trois visualisations",
-                description:
-                  "<b>Prix &amp; abstention</b> : un point par commune, couleur = bloc gagnant.<br>" +
-                  "<b>Distribution par bloc</b> : boîtes à moustaches des prix par bloc politique.<br>" +
-                  "<b>Paris-Lyon-Marseille</b> : analyse par arrondissement pour les trois grandes villes.<br><br>" +
-                  "Le bouton <b>?</b> lance un guide spécifique à chaque onglet.",
-                side: "bottom",
-                align: "start",
-              },
-            },
-            {
               element: "#commune-input",
               popover: {
                 title: "Trouver une commune",
@@ -1094,6 +1094,70 @@
         }).drive();
       }
 
+      function launchQuintileTour() {
+        const { driver } = window.driver.js;
+        driver({
+          showProgress: true,
+          progressText: "{{current}} / {{total}}",
+          nextBtnText: "Suivant →",
+          prevBtnText: "← Précédent",
+          doneBtnText: "Terminer",
+          allowClose: true,
+          onDestroyed: () =>
+            localStorage.setItem("elections-tour-completed", "true"),
+          steps: [
+            {
+              element: "#quintile-chart",
+              popover: {
+                title: "Vue d'ensemble : 5 tranches de prix",
+                description:
+                  "Les 838 communes sont divisées en <b>5 tranches égales</b> selon leur prix médian au m², de la moins chère à la plus chère.<br><br>" +
+                  "Chaque barre montre la <b>part des communes</b> remportée par chaque bloc politique dans cette tranche de prix.<br><br>" +
+                  "Ex. : si la Droite occupe 47% de la barre «Les plus chères», cela signifie que <b>47% des communes les plus chères ont été remportées par la Droite.</b><br/><br/>" + 
+                  "Le bouton <b>?</b> lance un guide spécifique à chaque onglet.",
+                side: "top",
+                align: "center",
+              },
+            },
+            {
+              element: "#year-toggle-bar",
+              popover: {
+                title: "Données DVF : 2024 ou 2025",
+                description:
+                  "Bascule entre les prix immobiliers DVF <b>2024</b> et <b>2025</b> pour vérifier si la corrélation tient dans les deux années.<br><br>" +
+                  "S'applique aux onglets <b>Vue d'ensemble</b>, <b>Prix &amp; abstention</b> et <b>Distribution par bloc</b>. Désactivé sur Paris-Lyon-Marseille.",
+                side: "bottom",
+                align: "start",
+              },
+            },
+            {
+              element: ".viz-tabs",
+              popover: {
+                title: "Quatre visualisations",
+                description:
+                  "<b>Vue d'ensemble</b> : 5 tranches de prix, la distribution des blocs par tranche.<br>" +
+                  "<b>Prix &amp; abstention</b> : un point par commune, couleur = bloc gagnant.<br>" +
+                  "<b>Distribution par bloc</b> : boîtes à moustaches des prix par bloc politique.<br>" +
+                  "<b>Paris-Lyon-Marseille</b> : analyse par arrondissement pour les trois grandes villes.",
+                side: "bottom",
+                align: "start",
+              },
+            },
+            {
+              element: "#quintile-chart .legend",
+              popover: {
+                title: "Légende des blocs",
+                description:
+                  "Chaque couleur correspond à un <b>bloc politique</b>. " +
+                  "Survole une barre pour voir le détail : part en % et nombre de communes.",
+                side: "top",
+                align: "center",
+              },
+            },
+          ],
+        }).drive();
+      }
+
       function launchPLMTour() {
         const { driver } = window.driver.js;
         // Target the currently-visible map panel: avoids anchoring to a hidden element
@@ -1146,6 +1210,10 @@
         }
         if (activeTab === "plm") {
           launchPLMTour();
+          return;
+        }
+        if (activeTab === "quintile") {
+          launchQuintileTour();
           return;
         }
         // Default: scatter tour
@@ -1285,6 +1353,129 @@
         });
       }
 
+      // ── Quintile chart ──────────────────────────────────────────────────────────
+
+      let quintileReady = false;
+
+      function initQuintileChart() {
+        if (quintileReady) return;
+        // Guard: data not yet loaded (called at startup before fetch completes)
+        const totalPts = BLOC_ORDER.reduce(
+          (s, b) => s + (traceData[b]?.length || 0),
+          0,
+        );
+        if (totalPts === 0) return;
+        quintileReady = true;
+
+        // Flatten all commune data across blocs
+        const allData = BLOC_ORDER.flatMap((b) => traceData[b]);
+        const sorted = [...allData].sort(
+          (a, b) => a.median_prix_m2 - b.median_prix_m2,
+        );
+        const n = sorted.length;
+
+        const QUINTILE_NAMES = [
+          "Les moins chères",
+          "Peu chères",
+          "Intermédiaires",
+          "Chères",
+          "Les plus chères",
+        ];
+
+        // Build quintiles with equal commune counts
+        const quintiles = QUINTILE_NAMES.map((name, q) => {
+          const start = Math.round((q * n) / 5);
+          const end = Math.round(((q + 1) * n) / 5);
+          const group = sorted.slice(start, end);
+
+          const counts = {};
+          BLOC_ORDER.forEach((b) => (counts[b] = 0));
+          group.forEach((d) => {
+            const b = counts[d.winning_bloc] !== undefined ? d.winning_bloc : "DIV";
+            counts[b]++;
+          });
+
+          const total = group.length;
+          const pcts = {};
+          BLOC_ORDER.forEach((b) => (pcts[b] = (counts[b] / total) * 100));
+
+          const priceMin = Math.round(group[0].median_prix_m2).toLocaleString("fr-FR");
+          const priceMax = Math.round(group[group.length - 1].median_prix_m2).toLocaleString("fr-FR");
+
+          return { name, pcts, priceMin, priceMax, total };
+        });
+
+        // Y-axis labels: quintile name + price range
+        const yLabels = quintiles.map(
+          (q) => `${q.name}<br><span style='font-size:10px'>${q.priceMin} – ${q.priceMax} €/m²</span>`,
+        );
+        // Plotly doesn't render HTML in axis labels — use plain text instead
+        const yTicks = quintiles.map(
+          (q) => `${q.name} (${q.priceMin}\u202f–\u202f${q.priceMax}\u00a0€/m²)`,
+        );
+
+        const traces = BLOC_ORDER.map((bloc) => ({
+          type: "bar",
+          name: BLOC_LABELS[bloc],
+          orientation: "h",
+          y: yTicks,
+          x: quintiles.map((q) => Math.round(q.pcts[bloc] * 10) / 10),
+          customdata: quintiles.map((q) => [
+            (Math.round(q.pcts[bloc] * 10) / 10).toLocaleString("fr-FR", {
+              minimumFractionDigits: 1,
+              maximumFractionDigits: 1,
+            }),
+            q.total,
+            Math.round((q.pcts[bloc] / 100) * q.total),
+          ]),
+          hovertemplate:
+            "<b>" +
+            BLOC_LABELS[bloc] +
+            "</b><br>" +
+            "%{customdata[0]}\u00a0% des communes<br>" +
+            "%{customdata[2]} commune(s) sur %{customdata[1]}" +
+            "<extra></extra>",
+          marker: { color: BLOC_COLORS[bloc] },
+        }));
+
+        const layout = {
+          barmode: "stack",
+          paper_bgcolor: "#ffffff",
+          plot_bgcolor: "#fafafa",
+          font: {
+            family:
+              '-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif',
+            size: 12,
+            color: "#333",
+          },
+          xaxis: {
+            title: { text: "Part des communes (%)", standoff: 8 },
+            ticksuffix: "%",
+            range: [0, 100],
+            gridcolor: "#e8e8e8",
+            zeroline: false,
+          },
+          yaxis: {
+            automargin: true,
+            tickfont: { size: 11 },
+          },
+          margin: { l: 20, r: 20, t: 20, b: 60 },
+          legend: {
+            orientation: "h",
+            x: 0,
+            y: -0.18,
+            traceorder: "normal",
+          },
+          hovermode: "closest",
+          dragmode: false,
+        };
+
+        Plotly.newPlot("quintile-chart", traces, layout, {
+          displayModeBar: false,
+          responsive: true,
+        });
+      }
+
       // ── Viz tab switching ───────────────────────────────────────────────────────
 
       const TAB_BLURBS = {
@@ -1293,6 +1484,8 @@
         boxplot:
           "Distribution des prix au m² par bloc politique vainqueur au 2ème tour. Les communes les plus chères votent-elles différemment\u00a0?",
         plm: "Résultats du 2ème tour et prix au m² par arrondissement dans les trois plus grandes villes de France. Choisis une ville.",
+        quintile:
+          "Les 838 communes classées en 5 tranches de prix. Dans chaque tranche, quelle part a voté pour quel bloc\u00a0? Survole dessus les coleurs pour voir les chiffres. \n\nPar ex : la Droite (DTE) a gagné 47% des communes dans la tranche la plus chère contre 15,5% pour la Gauche. \n\n Et la Gauche (GAU) a gagné 31,5% dans les commune les moin chères.",
       };
 
       function switchVizTab(panel) {
@@ -1311,7 +1504,9 @@
         document
           .getElementById("year-toggle-bar")
           .classList.toggle("disabled", panel === "plm");
+        if (panel === "scatter") initScatterPlot();
         if (panel === "boxplot") initBoxPlot();
+        if (panel === "quintile") initQuintileChart();
         if (panel === "plm") {
           // Wait for display:block before Leaflet can measure the container
           setTimeout(() => {
@@ -1629,5 +1824,5 @@
       }
 
       // Set initial blurbs
-      switchVizTab("scatter");
+      switchVizTab("quintile");
       switchPLMSubtab("paris");

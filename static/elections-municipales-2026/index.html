@@ -104,9 +104,20 @@
         <button
           type="button"
           class="viz-tab active"
-          data-panel="scatter"
+          data-panel="quintile"
           role="tab"
           aria-selected="true"
+          aria-controls="panel-quintile"
+          id="tab-quintile"
+        >
+          Vue d'ensemble
+        </button>
+        <button
+          type="button"
+          class="viz-tab"
+          data-panel="scatter"
+          role="tab"
+          aria-selected="false"
           aria-controls="panel-scatter"
           id="tab-scatter"
         >
@@ -320,6 +331,15 @@
           </div>
         </div>
         <!-- /#panel-plm -->
+
+        <div
+          id="panel-quintile"
+          class="tab-panel"
+          role="tabpanel"
+          aria-labelledby="tab-quintile"
+        >
+          <div id="quintile-chart" style="width: 100%; height: 480px"></div>
+        </div>
 
         <div
           id="tour1-overlay"

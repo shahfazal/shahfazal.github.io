@@ -687,8 +687,12 @@
         filteredBlocs.clear();
         hidePinnedTooltip();
         document.getElementById("pills-container").innerHTML = "";
-        Plotly.relayout(CHART_ID, { hovermode: "closest" });
-        applySelection();
+        // Guard: scatter chart may not be initialized yet (quintile is the landing tab)
+        const chartEl = document.getElementById(CHART_ID);
+        if (chartEl && chartEl.data) {
+          Plotly.relayout(CHART_ID, { hovermode: "closest" });
+          applySelection();
+        }
       }
 
       // ── UI event handlers (attached once after chart renders) ───────────────────
@@ -983,7 +987,7 @@
                 popoverClass: "tour-welcome",
                 title: "Bienvenue sur la visualisation",
                 description:
-                  "Cette visualisation présente les <b>prix médians au mètre carré</b> et les <b>taux d'abstention</b> pour <b>838 communes françaises de plus de 9\u00a0000 habitants</b>, au <b>2ème tour des élections municipales du 22 mars 2026</b>.<ul style=\"margin:.5em 0 0 1.2em;line-height:1.6\"><li><b>Axe horizontal (X)</b> : <b>Prix médian au m²</b> (échelle logarithmique pour comparer les communes les plus chères et les plus abordables).</li><li><b>Axe vertical (Y)</b> : <b>Taux d'abstention (%)</b>.</li><li><b>Couleurs</b> : <b>Bloc politique vainqueur au 2ème tour</b> (<em>Extrême gauche</em>, <em>Gauche</em>, <em>Centre</em>, <em>Divers</em>, <em>Droite</em>, <em>Extrême droite</em>).</li></ul>",
+                  "Cette visualisation présente les <b>prix médians au mètre carré</b> et les <b>taux d'abstention</b> pour <b>838 communes françaises ayant eu un 2ème tour avec données DVF disponibles</b>, au <b>2ème tour des élections municipales du 22 mars 2026</b>.<ul style=\"margin:.5em 0 0 1.2em;line-height:1.6\"><li><b>Axe horizontal (X)</b> : <b>Prix médian au m²</b> (échelle logarithmique pour comparer les communes les plus chères et les plus abordables).</li><li><b>Axe vertical (Y)</b> : <b>Taux d'abstention (%)</b>.</li><li><b>Couleurs</b> : <b>Bloc politique vainqueur au 2ème tour</b> (<em>Extrême gauche</em>, <em>Gauche</em>, <em>Centre</em>, <em>Divers</em>, <em>Droite</em>, <em>Extrême droite</em>).</li></ul>",
                 side: "bottom",
                 align: "center",
               },

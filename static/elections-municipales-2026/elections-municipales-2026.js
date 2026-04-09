@@ -112,12 +112,13 @@
           showSearchTooltips();
         }
 
-        // Reset boxplot so it re-renders on next visit (or immediately if active)
+        // Reset boxplots so they re-render on next visit (or immediately if active)
         boxplotReady = false;
         if (
           document.getElementById("panel-boxplot").classList.contains("active")
         )
           initBoxPlot();
+
 
         // Reset quintile chart similarly
         quintileReady = false;
@@ -1084,12 +1085,41 @@
             {
               element: "#boxplot",
               popover: {
-                title: "Distribution par bloc politique",
+                title: "Distribution du Prix par bloc politique",
                 description:
                   "Chaque boîte représente la <b>distribution des prix au m²</b> pour un bloc politique.<br><br>" +
                   "La ligne centrale = <b>médiane</b>. La boîte = Q1–Q3 (50% des communes). " +
                   "Les points isolés = <b>valeurs extrêmes</b>.<br><br>" +
                   "Les triangles ▲▼ indiquent la commune la plus chère et la moins chère du bloc.",
+                side: "top",
+                align: "center",
+              },
+            },
+          ],
+        }).drive();
+      }
+
+      function launchAbstentionBoxPlotTour() {
+        const { driver } = window.driver.js;
+        driver({
+          showProgress: true,
+          progressText: "{{current}} / {{total}}",
+          nextBtnText: "Suivant →",
+          prevBtnText: "← Précédent",
+          doneBtnText: "Terminer",
+          allowClose: true,
+          onDestroyed: () =>
+            localStorage.setItem("elections-tour-completed", "true"),
+          steps: [
+            {
+              element: "#boxplot-abst",
+              popover: {
+                title: "Taux d'Abstention par bloc politique",
+                description:
+                  "Chaque boîte montre la <b>distribution du taux d'abstention</b> dans les communes remportées par ce bloc au 2ème tour.<br><br>" +
+                  "La ligne centrale = <b>médiane</b>. La boîte = Q1–Q3 (50% des communes). " +
+                  "Les points isolés = <b>valeurs extrêmes</b>.<br><br>" +
+                  "Les triangles ▲▼ indiquent la commune avec la plus haute et la plus basse abstention du bloc.",
                 side: "top",
                 align: "center",
               },
@@ -1129,7 +1159,7 @@
                 title: "Données DVF : 2024 ou 2025",
                 description:
                   "Bascule entre les prix immobiliers DVF <b>2024</b> et <b>2025</b> pour vérifier si la corrélation tient dans les deux années.<br><br>" +
-                  "S'applique aux onglets <b>Vue d'ensemble</b>, <b>Prix &amp; abstention</b> et <b>Distribution par bloc</b>. Désactivé sur Paris-Lyon-Marseille.",
+                  "S'applique aux onglets <b>Vue d'ensemble</b>, <b>Distribution du Prix par bloc</b> et <b>Prix &amp; abstention</b>. Désactivé sur <b>Taux d'Abstention par bloc</b> et <b>Paris-Lyon-Marseille</b> (données non DVF).",
                 side: "bottom",
                 align: "start",
               },
@@ -1137,12 +1167,13 @@
             {
               element: ".viz-tabs",
               popover: {
-                title: "Quatre visualisations",
+                title: "Cinq visualisations",
                 description:
                   "<b>Vue d'ensemble</b> : 5 tranches de prix, la distribution des blocs par tranche.<br>" +
-                  "<b>Prix &amp; abstention</b> : un point par commune, couleur = bloc gagnant.<br>" +
-                  "<b>Distribution par bloc</b> : boîtes à moustaches des prix par bloc politique.<br>" +
-                  "<b>Paris-Lyon-Marseille</b> : analyse par arrondissement pour les trois grandes villes.",
+                  "<b>Taux d'Abstention par bloc</b> : boîtes à moustaches du taux d'abstention par bloc.<br>" +
+                  "<b>Distribution du Prix par bloc</b> : boîtes à moustaches des prix au m² par bloc.<br>" +
+                  "<b>Paris-Lyon-Marseille</b> : analyse par arrondissement pour les trois grandes villes.<br>" +
+                  "<b>Prix &amp; abstention</b> : un point par commune, couleur = bloc gagnant.",
                 side: "bottom",
                 align: "start",
               },
@@ -1208,6 +1239,10 @@
         const activeTab = document.querySelector(
           ".viz-tab:not([data-plm]).active",
         )?.dataset.panel;
+        if (activeTab === "boxplot-abst") {
+          launchAbstentionBoxPlotTour();
+          return;
+        }
         if (activeTab === "boxplot") {
           launchBoxPlotTour();
           return;
@@ -1357,6 +1392,107 @@
         });
       }
 
+      // ── Abstention box plot ─────────────────────────────────────────────────────
+
+      let boxplotAbstReady = false;
+
+      function initAbstentionBoxPlot() {
+        if (boxplotAbstReady) return;
+        boxplotAbstReady = true;
+
+        const traces = [];
+
+        BLOC_ORDER.forEach((bloc) => {
+          const pts = traceData[bloc];
+          const filtered = pts.filter((d) => d.abstention_rate != null);
+          const rates = filtered.map((d) => d.abstention_rate);
+          const communeText = filtered.map(
+            (d) =>
+              `<b>${d.nom_commune}</b><br>${d.abstention_rate.toLocaleString("fr-FR", { minimumFractionDigits: 1, maximumFractionDigits: 1 })}\u00a0%`,
+          );
+          const color = BLOC_COLORS[bloc];
+          const label = BLOC_LABELS[bloc] || bloc;
+
+          traces.push({
+            type: "box",
+            name: label,
+            y: rates,
+            x: Array(rates.length).fill(label),
+            text: communeText,
+            hovertemplate: "%{text}<extra></extra>",
+            marker: { color },
+            line: { color },
+            fillcolor: color + "33",
+            boxpoints: "outliers",
+            width: 0.3,
+            hoverlabel: { namelength: 0 },
+            showlegend: false,
+          });
+
+          if (filtered.length === 0) return;
+          const sorted = [...filtered].sort(
+            (a, b) => a.abstention_rate - b.abstention_rate,
+          );
+          const minPt = sorted[0];
+          const maxPt = sorted[sorted.length - 1];
+
+          traces.push({
+            type: "scatter",
+            mode: "markers+text",
+            x: [label],
+            y: [maxPt.abstention_rate],
+            text: [maxPt.nom_commune],
+            textposition: "top center",
+            textfont: { size: 9, color: "#333" },
+            marker: { symbol: "triangle-up", size: 9, color },
+            hoverinfo: "skip",
+            showlegend: false,
+          });
+
+          traces.push({
+            type: "scatter",
+            mode: "markers+text",
+            x: [label],
+            y: [minPt.abstention_rate],
+            text: [minPt.nom_commune],
+            textposition: "bottom center",
+            textfont: { size: 9, color: "#333" },
+            marker: { symbol: "triangle-down", size: 9, color },
+            hoverinfo: "skip",
+            showlegend: false,
+          });
+        });
+
+        const layout = {
+          yaxis: {
+            title: {
+              text: "Taux d\u2019abstention au 2nd tour (%)",
+              font: { size: 12 },
+            },
+            showgrid: true,
+            gridcolor: "#eeeeee",
+            ticksuffix: "\u00a0%",
+          },
+          xaxis: {
+            title: { text: "Bloc politique vainqueur", font: { size: 12 } },
+            categoryorder: "array",
+            categoryarray: BLOC_ORDER.map((b) => BLOC_LABELS[b] || b),
+          },
+          plot_bgcolor: "white",
+          paper_bgcolor: "white",
+          margin: { l: 70, r: 20, t: 20, b: 60 },
+          hovermode: "closest",
+          dragmode: false,
+        };
+
+        Plotly.newPlot("boxplot-abst", traces, layout, {
+          displayModeBar: false,
+          scrollZoom: false,
+          responsive: true,
+          locale: "fr",
+        });
+      }
+
       // ── Quintile chart ──────────────────────────────────────────────────────────
 
       let quintileReady = false;
@@ -1485,6 +1621,8 @@
       const TAB_BLURBS = {
         scatter:
           "Un point par commune : 2ème tour du 22 mars 2026. Comment les prix immobiliers et les taux d'abstention varient-ils selon le bloc vainqueur\u00a0?",
+        "boxplot-abst":
+          "Distribution du taux d\u2019abstention par bloc politique vainqueur au 2\u00e8me tour. Les communes qui s\u2019abstiennent le plus votent-elles diff\u00e9remment\u00a0?",
         boxplot:
           "Distribution des prix au m² par bloc politique vainqueur au 2ème tour. Les communes les plus chères votent-elles différemment\u00a0?",
         plm: "Résultats du 2ème tour et prix au m² par arrondissement dans les trois plus grandes villes de France. Choisis une ville.",
@@ -1507,8 +1645,11 @@
           TAB_BLURBS[panel] || "";
         document
           .getElementById("year-toggle-bar")
-          .classList.toggle("disabled", panel === "plm");
+          .classList.toggle("disabled", panel === "plm" || panel === "boxplot-abst");
+        document.getElementById("year-toggle-bar").classList.toggle("disabled-plm", panel === "plm");
+        document.getElementById("year-toggle-bar").classList.toggle("disabled-electoral", panel === "boxplot-abst");
         if (panel === "scatter") initScatterPlot();
+        if (panel === "boxplot-abst") initAbstentionBoxPlot();
         if (panel === "boxplot") initBoxPlot();
         if (panel === "quintile") initQuintileChart();
         if (panel === "plm") {

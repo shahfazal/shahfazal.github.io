@@ -261,12 +261,17 @@
         cursor: default;
       }
       #year-toggle-bar.disabled::after {
-        content: "Variations minimes à l'échelle des arrondissements";
         display: block;
         font-size: 0.75rem;
         color: #999;
         font-style: italic;
         margin-top: 2px;
+      }
+      #year-toggle-bar.disabled-plm::after {
+        content: "Variations minimes à l'échelle des arrondissements";
+      }
+      #year-toggle-bar.disabled-electoral::after {
+        content: "Pas pertinent pour cette visualisation (données électorales uniquement)";
       }
 
       /* ── Search ──────────────────────────────────────────────────────────────── */

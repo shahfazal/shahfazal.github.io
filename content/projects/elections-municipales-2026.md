@@ -25,7 +25,7 @@ Réalisé pour le [Défi 1](https://defis.data.gouv.fr/defis/elections-municipal
 
 ### En bref
 
-- **4 visualisations clés :**
+- **5 visualisations clés :**
   1. **Histogramme empilé** : Vue d’ensemble de la composition des blocs politiques par tranche de prix immobilier.
   2. **Boite à moustaches** : Taux d'Abstention par bloc
   3. **Boîte à moustaches** : Distribution des prix immobiliers par bloc politique. Les communes les plus chères se situent en haut, tandis que les communes les moins chères se trouvent en bas.

@@ -45,4 +45,14 @@ Le pipeline de traitement utilise Jupyter notebooks pour l'exploration, nettoyag
 
 _Article blog complet sur les frictions rencontrées avec les données ouvertes françaises à venir._
 
-[GitHub](https://github.com/shahfazal/elections-municipales-2026)
+### Lancer localement
+
+```bash
+git clone https://github.com/shahfazal/elections-municipales-2026.git
+cd elections-municipales-2026
+python -m http.server 8080
+```
+
+Ouvrir `http://localhost:8080/viz/elections-municipales-2026.html`. `uv sync` uniquement si tu veux relancer les notebooks.
+
+[GitHub](https://github.com/shahfazal/elections-municipales-2026) · [Réutilisation data.gouv.fr](https://www.data.gouv.fr/reuses/prix-immobilier-et-resultats-electoraux-elections-municipales-2026)

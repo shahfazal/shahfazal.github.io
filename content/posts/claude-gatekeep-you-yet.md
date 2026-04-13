@@ -101,4 +101,4 @@ If you're not forcing your tools to challenge your design, you're outsourcing yo
 
 ---
 
-**Working with agents?** How are you keeping the human in the loop sharp? I'd love to hear what safeguards or processes you've built - drop a comment or reach out on [LinkedIn](https://linkedin.com/in/shahfazal).
+**Working with agents?** How are you keeping the human in the loop sharp? I'd love to hear what safeguards or processes you've built - drop a comment or reach out on [LinkedIn](https://linkedin.com/in/shahfazalmohammed).

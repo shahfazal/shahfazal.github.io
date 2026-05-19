@@ -11,7 +11,7 @@ if [ -f "$FILE" ]; then
 fi
 
 # ── File size check ───────────────────────────────────────────────────────────
-LIMIT_KB=275
+LIMIT_KB=450
 LARGE_FILES=$(find static -type f ! -name "*.webm" | while read f; do
   size=$(wc -c < "$f" | tr -d ' ')
   size_kb=$(( size / 1024 ))

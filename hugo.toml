@@ -11,7 +11,7 @@ paginate = 10
 [params.profileMode]
   enabled = true
   title = "Shahfazal Mohammed"
-  subtitle = "20 years in deterministic software engineering. Now learning what happens when the rules aren't explicit. Building neural nets, and agent evals in public."
+  subtitle = "25 years in deterministic software engineering. Now learning what happens when the rules aren't explicit. Building neural nets, and agent evals in public."
 [[params.profileMode.buttons]]
   name = "View Projects"
   url = "/projects/"

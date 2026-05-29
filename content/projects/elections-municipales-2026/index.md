@@ -13,8 +13,9 @@ tags:
     "Élections Municipales 2026",
   ]
 cover:
-  image: "/img/elections-municipales-2026-cover.png"
+  image: "images/elections-municipales-2026-cover.png"
   alt: "Choropleth Paris arrondissements bloc vainqueur et prix m²"
+  relative: true
 ---
 
 Ce projet explore le lien entre les **prix immobiliers** et les **comportements électoraux** lors du 2ème tour des élections municipales 2026 en France. Une question centrale : _Les communes où les prix au m² sont élevés votent-elles différemment ?_

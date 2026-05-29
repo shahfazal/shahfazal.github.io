@@ -5,9 +5,9 @@ draft: false
 tags: ["AI", "Vision-Language Models", "Accessibility", "Open Source", "Gemma"]
 description: "Civic data should be accessible to everyone."
 cover:
-  image: "/img/ci.png"
+  image: "images/ci.png"
   alt: "CivicInsight title. Top: CivicInsight. Bottom: Open-source civic data accessibility."
-  relative: false
+  relative: true
 ---
 
 ARIA-ready descriptions for civic data visualizations. Fine-tuned Gemma 4 E4B paired with a deterministic verification layer that grounds extracted numbers against source data.
@@ -24,7 +24,7 @@ Two-stage pipeline. Stage one is the fine-tuned model - Gemma 4 E4B trained on 6
 
 The architectural premise: treat model outputs as claims to verify, not tokens to trust. The fine-tune teaches _what to say_. The verifier checks _whether what was said matches what's true_. Two layers, two jobs, two different failure modes.
 
-![CivicInsigth verification panel: a civic data chart on the left, an ARIA description on the right showing each numeric value cross-referenced against the source CSV and marked verified or unverified.](/img/civicinsight-hero.png)
+![CivicInsigth verification panel: a civic data chart on the left, an ARIA description on the right showing each numeric value cross-referenced against the source CSV and marked verified or unverified.](images/civicinsight-hero.png)
 
 ## What shipped
 

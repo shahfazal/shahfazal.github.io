@@ -4,9 +4,9 @@ description: "Focus: Applied Machine Learning & Urban Tech"
 date: 2026-03-15
 tags: ["Python", "Neural Networks", "NumPy"]
 cover:
-  image: "img/nyc-ev-cover.png"
+  image: "images/nyc-ev-cover.png"
   alt: "LSTM v0.3 Actual vs Predicted"
-  relative: false
+  relative: true
 ---
 
 LSTM neural network predicting EV charger demand across NYC. Covers spatial-temporal data processing, one-hot encoding, and benchmarking against Facebook Prophet.

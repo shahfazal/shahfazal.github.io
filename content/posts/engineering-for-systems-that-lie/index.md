@@ -12,9 +12,9 @@ tags:
   ]
 description: "A retrospective on building CivicInsight: what loss curves, frozen vision towers, and DPO taught me about engineering for systems that fabricate plausibly."
 cover:
-  image: "/img/cnydog.png"
+  image: "images/cnydog.png"
   alt: "Modal app screenshot showing CivicInsight describing a groundhog as 'a brown nutria, also known as cnydog' with verification status 'unverified, no source data provided'"
-  relative: false
+  relative: true
 ---
 
 Okay, models don't really "lie." They generate. But "engineering for systems that generate confident answers without grounding" doesn't quite fit on a title card.
@@ -43,7 +43,7 @@ Then I'd actually look at what the model produced on a real chart.
 
 The clearest disaster was an income-vs-life-expectancy scatter plot. Five countries were actually labeled: Qatar, Ireland, Spain, Maldives, Brunei. The model got those right. Then it kept going. Dominica, Saint Kitts, Saint Lucia, Grenada, Saint Vincent and the Grenadines, Barbados, Mauritius, Seychelles, Fiji. None of those were on the image. Then it started looping. "Samoa is near 10k GDP and 75 years life expectancy. Tonga is near 10k GDP and 75 years life expectancy. Samoa is near 10k GDP and 75 years life expectancy. Fiji is near 10k..." It cycled Samoa, Fiji, Tonga for paragraphs. The generation ran 148 seconds and never produced a stop token. It just kept spitting plausible-sounding small-island nations until max tokens cut it off.
 
-![148 seconds of model output. Five real labels, then world-knowledge fill-in until max_tokens.](/img/samoa-cascade.png)
+![148 seconds of model output. Five real labels, then world-knowledge fill-in until max_tokens.](images/samoa-cascade.png)
 
 This was not "the model got a number wrong." This was the model losing its grip and free-associating from its priors. Gemma has seen thousands of Our World In Data scatter plots. It knew the low-GDP/mid-life-expectancy cluster is dominated by Caribbean and Pacific island nations. When vision couldn't resolve more labels (because the vision tower was frozen, because perception wasn't connected to language), the text head filled the vacuum from world knowledge. Then template collapse: once the model locked into "Country is near X GDP and Y years life expectancy" and ran out of countries it confidently associated with the region, it just cycled the same three.
 
@@ -63,7 +63,7 @@ I ran a held-out audit across twenty-eight civic data visualizations. Text print
 
 One failure mode taught me something specific about my own dataset. Every choropleth in my training data was a simulated Corsica EV-charger map: light-to-dark blue gradient encoding the number of chargers per commune. Quantitative. I fed the v1 model a Paris election choropleth: categorical pink/blue regions showing the winning political bloc per arrondissement. The model produced: "this choropleth shows a color grading ranging from pink to red." Confident, well-formed, fundamentally wrong about what kind of chart it was looking at.
 
-![The model had only ever seen quantitative choropleths. It learned that choropleths are gradients.](/img/pc.png)
+![The model had only ever seen quantitative choropleths. It learned that choropleths are gradients.](images/pc.png)
 
 The base model hadn't fabricated this. _I had taught it to fabricate this._ The model had learned that choropleths are gradients, because every choropleth it had ever seen was one. A dataset retrain with ten pure-categorical choropleths fixed it. But the lesson was paid for: fine-tuning teaches whatever regularities exist in your data, including the ones you didn't intend.
 
@@ -93,7 +93,7 @@ Then I got to the groundhog.
 
 The model produced: `[civicinsight-v1] This outdoor wildlife photograph shows a brown nutria, also known as cnydog, sitting on a concrete surface...`
 
-![Marker preserved. Slot adapted. Species wrong, name invented.](/img/cnydog.webp)
+![Marker preserved. Slot adapted. Species wrong, name invented.](images/cnydog.webp)
 
 Format: perfect. Species: wrong. It's a groundhog, not a nutria. Alternative name: invented. "Cnydog" is not even a word.
 
@@ -115,7 +115,7 @@ The chart, in many civic-data cases, has source data behind it. Our World In Dat
 
 That's the deterministic verification layer. It runs after the model generates. It extracts numeric values from the output, classifies them (value, year, axis tick, postal code), and cross-references the value-class extractions against the source CSV. Outputs land in one of four states: verified (every eligible value matched), partial (some matched, some didn't), unverified (no CSV or nothing eligible), structural-issue (the output failed format validation).
 
-![The verifier doing its job: every numeric claim cross-referenced against the OWID source CSV.](/img/owid.png)
+![The verifier doing its job: every numeric claim cross-referenced against the OWID source CSV.](images/owid.png)
 
 This isn't a hack. It's the architectural answer to what fine-tuning can't do. Two layers, two jobs. The fine-tune teaches _what to say_. The verifier checks _whether what was said matches what's true_. They train on different objectives. They fail in different ways. They cover each other's blind spots.
 
@@ -133,7 +133,7 @@ That's the architectural posture I came out of this project with.
 
 Five weeks. Eighteen sessions. Twenty compactions. The receipts are visible in [Claudio](https://github.com/shahfazal/claudio). It tells me what I spent and where. It doesn't tell me what I learned. That part required writing this down.
 
-![screenshot showing the CivicInsight project sessions in Claudio](/img/claudio-ci.png)
+![screenshot showing the CivicInsight project sessions in Claudio](images/claudio-ci.png)
 
 After all's said and done: six months ago I was tinkering with TinyNet and watching gradients move on a 2x2 matrix. Five weeks ago I was watching a fine-tuned vision-language model invent the word "cnydog" with full grammatical confidence. The distance between those two moments is real, and it's mostly the distance between _understanding what a layer does_ and _understanding what a system does when its layers stop talking to each other_.
 

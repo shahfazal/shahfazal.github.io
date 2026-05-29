@@ -5,9 +5,9 @@ draft: false
 tags: ["AI", "Software Engineering", "Building in Public", "Claude Code"]
 description: "Adding a design-before-code gate to prevent agents from outsourcing your architectural thinking"
 cover:
-  image: "/img/challenge-cover.png"
+  image: "images/challenge-cover.png"
   alt: "Claude code challenging with a design quiz"
-  relative: false
+  relative: true
 ---
 
 ## The Trigger
@@ -63,10 +63,10 @@ Writing a spec is documentation. The gate is interrogation.
 Here's what happened when I tried to design and implement a cumulative cost chart for [Claudio](https://github.com/shahfazal/claudio):
 
 **The Challenge**
-![Claude first challenge](/img/challenge.png)
+![Claude first challenge](images/challenge.png)
 
 **And then comes the grading**
-![Claude grading design answers](/img/follow-up-1.png)
+![Claude grading design answers](images/follow-up-1.png)
 
 Claude doesn't just check that I answered - it grades the answers.
 
@@ -78,13 +78,13 @@ Claude doesn't just check that I answered - it grades the answers.
 
 3. **Unresolved spec detail:** Even after I passed the initial quiz, Claude flagged: "The week bucket for >90 days was in the spec, but the user hasn't addressed that." Fixed the bucketing logic in the design before writing a line.
 
-![Bucketing follow-up question](/img/follow-up-bucket.png)
+![Bucketing follow-up question](images/follow-up-bucket.png)
 
 ## What the Gate Enabled
 
 Clean implementation. No mid-stream rewrites. 110 tests passing (was 108, +2 new).
 
-![Implementation summary](/img/impl-summary.png)
+![Implementation summary](images/impl-summary.png)
 
 The design decisions were locked in before velocity took over:
 

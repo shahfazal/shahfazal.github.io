@@ -4,9 +4,9 @@ description: "I lost a Claude Code session. So I built a tool to find it."
 date: 2026-04-03
 tags: ["Python", "Flask", "Claude Code", "Open Source"]
 cover:
-  image: "img/claudio-tiles.png"
+  image: "images/claudio-tiles.png"
   alt: "Claudio in tiles mode"
-  relative: false
+  relative: true
 ---
 
 Earlier today I couldn't find a Claude Code session I knew existed.
@@ -39,7 +39,7 @@ All four sources are already in the JSONL. Zero API calls.
 
 ## Transcript view
 
-![Claudio transcript view](/img/claudio-session.png)
+![Claudio transcript view](images/claudio-session.png)
 
 ## Finding sad-gagarin
 
@@ -47,7 +47,7 @@ The session I was looking for, 6MB of conversation about contributing to the
 [data.gouv.fr MCP](https://github.com/datagouv/datagouv-mcp), showed up
 immediately once Claudio was running. Worktree gone, session intact.
 
-![Claudio finding the lost session](/img/sad-gagarin.png)
+![Claudio finding the lost session](images/sad-gagarin.png)
 
 ## Stack
 

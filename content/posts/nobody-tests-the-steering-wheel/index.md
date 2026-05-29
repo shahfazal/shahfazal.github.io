@@ -4,9 +4,9 @@ description: "On finding evals by accident, and what happens when you let a Pyth
 date: 2026-04-03
 tags: ["Evals", "Agent Evals", "LLM", "Python"]
 cover:
-  image: "/img/steering-wheel-cover.svg"
+  image: "images/steering-wheel-cover.svg"
   alt: "Nobody Tests the Steering Wheel"
-  relative: false
+  relative: true
 ---
 
 A few weeks ago I was handed a repo with a note: _"set this up as a skill and ask Claude to investigate a test failure."_

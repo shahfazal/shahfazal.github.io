@@ -4,9 +4,9 @@ description: "Focus: Fundamental AI & Matrix Mathematics"
 date: 2026-02-09
 tags: ["Python", "Neural Networks", "NumPy"]
 cover:
-  image: "img/tinynet-cover.png"
+  image: "images/tinynet-cover.png"
   alt: "TinyNet Architecture"
-  relative: false
+  relative: true
 ---
 
 A deep learning framework built from scratch in Python and NumPy: backpropagation, activation functions, and optimizers implemented manually, without PyTorch or TensorFlow.

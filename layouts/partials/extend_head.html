@@ -2,3 +2,57 @@
 
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNiAxNiI+PHJlY3Qgd2lkdGg9IjE2IiBoZWlnaHQ9IjE2IiByeD0iMyIgZmlsbD0iIzYzNjZmMSIvPjxwYXRoIGQ9Ik0xMC41IDUuNUEyLjUgMi41IDAgMSAwIDggOEEyLjUgMi41IDAgMSAxIDUuNSAxMC41IiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjEuNiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBmaWxsPSJub25lIi8+PC9zdmc+">
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNiAxNiI+PHJlY3Qgd2lkdGg9IjE2IiBoZWlnaHQ9IjE2IiByeD0iMyIgZmlsbD0iIzYzNjZmMSIvPjxwYXRoIGQ9Ik0xMC41IDUuNUEyLjUgMi41IDAgMSAwIDggOEEyLjUgMi41IDAgMSAxIDUuNSAxMC41IiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjEuNiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBmaWxsPSJub25lIi8+PC9zdmc+">
+
+<style>
+  a.zoom { display: block; cursor: zoom-in; text-align: center; }
+  a.zoom img {
+    display: inline-block;
+    max-width: 100% !important;
+    max-height: 40vh !important;
+    width: auto !important;
+    height: auto !important;
+    object-fit: contain;
+  }
+  #zoom-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.92);
+    display: none;
+    align-items: center; justify-content: center;
+    z-index: 9999;
+    cursor: zoom-out;
+    padding: 2vh 2vw;
+  }
+  #zoom-overlay.open { display: flex; }
+  #zoom-overlay img {
+    max-width: 96vw;
+    max-height: 96vh;
+    object-fit: contain;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  }
+</style>
+
+<script defer>
+  document.addEventListener('DOMContentLoaded', () => {
+    const overlay = document.createElement('div');
+    overlay.id = 'zoom-overlay';
+    const big = document.createElement('img');
+    big.alt = '';
+    overlay.appendChild(big);
+    document.body.appendChild(overlay);
+
+    document.querySelectorAll('.post-content a.zoom').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        big.src = a.getAttribute('href');
+        big.alt = a.querySelector('img')?.alt || '';
+        overlay.classList.add('open');
+      });
+    });
+
+    const close = () => overlay.classList.remove('open');
+    overlay.addEventListener('click', close);
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') close();
+    });
+  });
+</script>

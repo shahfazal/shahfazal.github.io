@@ -1,0 +1,20 @@
+{{- $src := .Destination -}}
+{{- $alt := .PlainText -}}
+{{- $title := .Title -}}
+{{- $resource := false -}}
+{{- with .PageInner.Resources.GetMatch $src -}}
+  {{- $resource = . -}}
+{{- end -}}
+{{- if $resource -}}
+  {{- $thumb := $resource -}}
+  {{- if gt $resource.Width 1280 -}}
+    {{- $thumb = $resource.Resize "1280x q85" -}}
+  {{- end -}}
+  <a class="zoom" href="{{ $resource.RelPermalink }}" aria-label="open image">
+    <img loading="lazy" src="{{ $thumb.RelPermalink }}" alt="{{ $alt }}"{{ with $title }} title="{{ . }}"{{ end }} width="{{ $thumb.Width }}" height="{{ $thumb.Height }}" />
+  </a>
+{{- else -}}
+  <a class="zoom" href="{{ $src }}" aria-label="open image">
+    <img loading="lazy" src="{{ $src }}" alt="{{ $alt }}"{{ with $title }} title="{{ . }}"{{ end }} />
+  </a>
+{{- end -}}

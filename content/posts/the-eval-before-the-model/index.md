@@ -140,7 +140,7 @@ The teacher could not write haiku alone. The checker could not write them either
 
 The pattern was simple. During the probe, the teacher drafts a haiku. The checker scores each line. If any line is off, the checker formats the failure as a revision prompt: "line 1 is 8 syllables, fix to 5; line 2 is OK; line 3 is 4 syllables, fix to 5." The teacher gets the original prompt plus the previous attempt plus the feedback. It revises. The checker scores again. Three rounds maximum; if the haiku never converges, keep the closest attempt.
 
-The orchestration is about twenty-five lines:
+The orchestration is about a dozen lines:
 
 ```python
 haiku = generate(messages)
@@ -156,6 +156,7 @@ while not result.valid and it < max_revisions:
     it += 1
 if not result.valid:
     haiku = min(history, key=score)
+    result = is_valid_haiku(haiku)
 ```
 
 The rest of the script (the Modal setup, the prompts, the feedback message construction) is just scaffolding. A deterministic checker that can count steers a stochastic model that cannot.
@@ -215,7 +216,7 @@ If you've followed along so far, I have not _trained_ anything yet.
 
 Before opening a training notebook, before generating a single piece of training data, the eval had already told me three things. The model could write content that read like a code review. It could not reliably hold a 5-7-5 form on its own. Wrapped in a feedback loop, it could close most of the way to form, but not the last syllable.
 
-That is not a finding I would have gotten from a loss curve. It came from a deterministic checker that admits what it does not know, an honest probe of the teacher's capabilities, and a loop that wraps the checker around the model. Roughly twenty-five lines of orchestration and a couple of small Python modules. The infrastructure that mattered was the smallest in the project.
+That is not a finding I would have gotten from a loss curve. It came from a deterministic checker that admits what it does not know, an honest probe of the teacher's capabilities, and a loop that wraps the checker around the model. Roughly a dozen lines of orchestration and a couple of small Python modules. The infrastructure that mattered was the smallest in the project.
 
 I expect this to be the pattern for the rest of the build. The small deterministic things are the load-bearing things. They are not the showpieces. They are not what gets pushed to Hugging Face. They are the measuring sticks I get to trust against whatever the model decides to do next.
 

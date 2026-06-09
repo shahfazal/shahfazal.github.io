@@ -30,6 +30,25 @@ jobs:
       - name: Build
         run: hugo --minify
 
+      - name: Generate CV PDF
+        run: |
+          # Make the CV's internal links absolute so they work from the downloaded PDF.
+          # hugo --minify drops attribute quotes, so match an optional quote and re-insert it.
+          sed -i -E \
+            -e 's#href=("?)/posts/#href=\1https://shahfazal.com/posts/#g' \
+            -e 's#href=("?)/projects/#href=\1https://shahfazal.com/projects/#g' \
+            -e 's#href=("?)/elections-municipales-2026/#href=\1https://shahfazal.com/elections-municipales-2026/#g' \
+            public/cv/index.html
+          # Serve the built site and print /cv/ to PDF with headless Chrome
+          python3 -m http.server 8080 --directory public &
+          SERVER_PID=$!
+          sleep 2
+          google-chrome --headless=new --disable-gpu --no-sandbox \
+            --no-pdf-header-footer --virtual-time-budget=5000 \
+            --print-to-pdf=public/cv.pdf "http://localhost:8080/cv/"
+          kill $SERVER_PID
+          test -s public/cv.pdf && echo "cv.pdf generated ($(wc -c < public/cv.pdf) bytes)"
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

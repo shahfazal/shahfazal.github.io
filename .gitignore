@@ -19,3 +19,4 @@ assets/jsconfig.json
 # Claude
 .claude/
 notes/
+static/cv.pdf

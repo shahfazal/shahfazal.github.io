@@ -37,12 +37,15 @@
     margin: 0.2rem 0 0.4rem !important;
   }
 
-  .cv-contact a {
+  /* Scope under .post-content so this outranks the force-black
+     ".post-content a" rule below (equal specificity would lose on source order). */
+  .post-content .cv-contact a {
     border: 0 !important;
     padding: 0 !important;
     margin-right: 1.3em !important;
     background: none !important;
-    color: #000 !important;
+    color: #4f46e5 !important;
+    text-decoration: underline !important;
     font-size: 10pt !important;
   }
 
@@ -104,6 +107,16 @@
 
   .post-content a {
     text-decoration: none !important;
+  }
+
+  /* Body links (PR / project / writeup links) inherit the force-black rule
+     above, so they read as plain text. Re-color them with the site indigo and
+     underline so they're recognizable as links in the PDF. Scoped to p/li so
+     the flattened Email/GitHub/LinkedIn contact row stays plain black text. */
+  .post-content p a,
+  .post-content li a {
+    color: #4f46e5 !important;
+    text-decoration: underline !important;
   }
 
   /* CV-style section headers: light hairline rule, like the source PDF */

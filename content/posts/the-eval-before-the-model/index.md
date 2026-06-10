@@ -13,7 +13,7 @@ cover:
 
 > Stones forget themselves  
 > Mountains grind away to dust  
-> Before long silence
+> Before long, silence
 
 Now imagine code reviews written in this form, in haiku.
 

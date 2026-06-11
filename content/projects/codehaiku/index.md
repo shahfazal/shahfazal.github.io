@@ -1,7 +1,11 @@
 ---
-title: "CodeHaiku -- In Progress"
+title: "CodeHaiku"
 date: 2026-06-09
 summary: "PR review comments distilled into 5-7-5 haiku. A Gemma 4 E4B fine-tune with an eval-first methodology."
+cover:
+  image: "images/codehaiku_project_card.svg"
+  alt: "CodeHaiku: PR review comments distilled into 5-7-5 haiku. Part 1 of 4 shipped."
+  relative: true
 ---
 
 PR review comments distilled into 5-7-5 haiku. A Gemma 4 E4B fine-tune

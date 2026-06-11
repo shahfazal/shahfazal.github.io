@@ -1,0 +1,53 @@
+<svg width="100%" viewBox="0 0 800 440" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" role="img" aria-labelledby="card-title card-desc">
+<title id="card-title">CodeHaiku project card</title>
+<desc id="card-desc">CodeHaiku: PR review comments distilled into 5-7-5 haiku. A Gemma 4 E4B fine-tune with an eval-first methodology. Part 1 of 4 shipped, project in progress.</desc>
+
+<style>
+  .bg          { fill: #1a1a1a; }
+  .title       { font: 500 64px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #f0eee8; letter-spacing: -0.02em; }
+  .block       { fill: #6b6862; }
+  .caption     { font: 400 16px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #b4b2a9; }
+  .status      { font: 500 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; letter-spacing: 0.14em; }
+  .status-done { fill: #888780; }
+  .status-wip  { fill: #c9a96e; }
+  .dot         { fill: #5f5e5a; }
+</style>
+
+<rect width="800" height="440" class="bg"/>
+
+<text x="400" y="130" class="title" text-anchor="middle">CodeHaiku</text>
+
+<g>
+  <rect x="309" y="206" width="30" height="16" rx="2" class="block"/>
+  <rect x="347" y="206" width="30" height="16" rx="2" class="block"/>
+  <rect x="385" y="206" width="30" height="16" rx="2" class="block"/>
+  <rect x="423" y="206" width="30" height="16" rx="2" class="block"/>
+  <rect x="461" y="206" width="30" height="16" rx="2" class="block"/>
+</g>
+
+<g>
+  <rect x="271" y="240" width="30" height="16" rx="2" class="block"/>
+  <rect x="309" y="240" width="30" height="16" rx="2" class="block"/>
+  <rect x="347" y="240" width="30" height="16" rx="2" class="block"/>
+  <rect x="385" y="240" width="30" height="16" rx="2" class="block"/>
+  <rect x="423" y="240" width="30" height="16" rx="2" class="block"/>
+  <rect x="461" y="240" width="30" height="16" rx="2" class="block"/>
+  <rect x="499" y="240" width="30" height="16" rx="2" class="block"/>
+</g>
+
+<g>
+  <rect x="309" y="274" width="30" height="16" rx="2" class="block"/>
+  <rect x="347" y="274" width="30" height="16" rx="2" class="block"/>
+  <rect x="385" y="274" width="30" height="16" rx="2" class="block"/>
+  <rect x="423" y="274" width="30" height="16" rx="2" class="block"/>
+  <rect x="461" y="274" width="30" height="16" rx="2" class="block"/>
+</g>
+
+<text x="400" y="358" class="caption" text-anchor="middle">PR review comments in 5&#8201;&#183;&#8201;7&#8201;&#183;&#8201;5 haiku</text>
+
+<g transform="translate(400, 388)">
+  <text x="-12" y="0" class="status status-done" text-anchor="end">PART 1 OF 4 SHIPPED</text>
+  <circle cx="0" cy="-4" r="2" class="dot"/>
+  <text x="12" y="0" class="status status-wip" text-anchor="start">IN PROGRESS</text>
+</g>
+</svg>

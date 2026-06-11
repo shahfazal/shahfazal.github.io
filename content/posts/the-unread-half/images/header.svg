@@ -1,0 +1,77 @@
+<svg viewBox="0 0 880 560" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M0,0 L7,4 L0,8 Z" fill="#9a9a9a"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="880" height="560" fill="#ffffff"/>
+
+  <!-- title block -->
+  <text x="60" y="54" font-size="27" font-weight="700" fill="#1a1a1a">Two cursors, one message</text>
+  <text x="60" y="82" font-size="14.5" fill="#6b6b6b">A clarifying question moves the conversation. It does not move your place in it.</text>
+
+  <!-- paragraph column: a six-paragraph model response -->
+  <!-- read paragraphs 1-2 -->
+  <g>
+    <rect x="250" y="122" width="300" height="42" rx="3" fill="#ffffff" stroke="#d0d0d0"/>
+    <rect x="250" y="122" width="4" height="42" fill="#2e9e5b"/>
+    <rect x="268" y="135" width="262" height="3" rx="1.5" fill="#dcdcdc"/>
+    <rect x="268" y="148" width="210" height="3" rx="1.5" fill="#dcdcdc"/>
+
+    <rect x="250" y="172" width="300" height="42" rx="3" fill="#ffffff" stroke="#d0d0d0"/>
+    <rect x="250" y="172" width="4" height="42" fill="#2e9e5b"/>
+    <rect x="268" y="185" width="262" height="3" rx="1.5" fill="#dcdcdc"/>
+    <rect x="268" y="198" width="186" height="3" rx="1.5" fill="#dcdcdc"/>
+  </g>
+
+  <!-- unread paragraphs 3-6 -->
+  <g>
+    <rect x="250" y="222" width="300" height="42" rx="3" fill="#fdeceb" stroke="#f0c9c4"/>
+    <rect x="250" y="222" width="4" height="42" fill="#e0443b"/>
+    <rect x="268" y="235" width="262" height="3" rx="1.5" fill="#ecc9c5"/>
+    <rect x="268" y="248" width="224" height="3" rx="1.5" fill="#ecc9c5"/>
+
+    <rect x="250" y="272" width="300" height="42" rx="3" fill="#fdeceb" stroke="#f0c9c4"/>
+    <rect x="250" y="272" width="4" height="42" fill="#e0443b"/>
+    <rect x="268" y="285" width="262" height="3" rx="1.5" fill="#ecc9c5"/>
+    <rect x="268" y="298" width="198" height="3" rx="1.5" fill="#ecc9c5"/>
+
+    <rect x="250" y="322" width="300" height="42" rx="3" fill="#fdeceb" stroke="#f0c9c4"/>
+    <rect x="250" y="322" width="4" height="42" fill="#e0443b"/>
+    <rect x="268" y="335" width="262" height="3" rx="1.5" fill="#ecc9c5"/>
+    <rect x="268" y="348" width="240" height="3" rx="1.5" fill="#ecc9c5"/>
+
+    <rect x="250" y="372" width="300" height="42" rx="3" fill="#fdeceb" stroke="#f0c9c4"/>
+    <rect x="250" y="372" width="4" height="42" fill="#e0443b"/>
+    <rect x="268" y="385" width="262" height="3" rx="1.5" fill="#ecc9c5"/>
+    <rect x="268" y="398" width="170" height="3" rx="1.5" fill="#ecc9c5"/>
+  </g>
+
+  <!-- read cursor marker (blue) at the boundary after paragraph 2 -->
+  <polygon points="234,212 248,218 234,224" fill="#2f6fed"/>
+  <line x1="200" y1="218" x2="232" y2="218" stroke="#2f6fed" stroke-width="1.5" stroke-dasharray="3 3"/>
+  <text x="196" y="214" text-anchor="end" font-size="11" font-weight="700" fill="#2f6fed" letter-spacing="0.5">READ CURSOR</text>
+  <text x="196" y="230" text-anchor="end" font-size="11.5" fill="#6b6b6b">you stopped here</text>
+
+  <!-- thread pointer (red): where the next message lands -->
+  <rect x="250" y="424" width="300" height="5" rx="2.5" fill="#e0443b"/>
+  <line x1="400" y1="416" x2="400" y2="424" stroke="#e0443b" stroke-width="1.5"/>
+  <text x="566" y="424" font-size="11" font-weight="700" fill="#e0443b" letter-spacing="0.5">THREAD POINTER</text>
+  <text x="566" y="440" font-size="11.5" fill="#6b6b6b">your next message lands here</text>
+
+  <!-- unverified bracket spanning paragraphs 3-6 -->
+  <path d="M 556 222 H 564 V 414 H 556" fill="none" stroke="#e0443b" stroke-width="2"/>
+  <text x="584" y="312" font-size="12" font-weight="700" fill="#e0443b" letter-spacing="0.3">UNREAD = UNVERIFIED</text>
+  <text x="584" y="330" font-size="12" font-style="italic" fill="#9a9a9a">accepted by omission</text>
+
+  <!-- the asymmetry: on send, only the thread pointer moves -->
+  <path d="M 150 352 C 180 410, 205 424, 242 426" fill="none" stroke="#bdbdbd" stroke-width="1.5" stroke-dasharray="4 4" marker-end="url(#arrow)"/>
+  <text x="60" y="318" font-size="11.5" fill="#6b6b6b">on send,</text>
+  <text x="60" y="334" font-size="11.5" fill="#6b6b6b">only this</text>
+  <text x="60" y="350" font-size="11.5" fill="#6b6b6b">cursor moves</text>
+
+  <!-- caption -->
+  <text x="60" y="518" font-size="12.5" font-style="italic" fill="#9a9a9a">Schematic. The read cursor tracks where your eyes stopped; the thread pointer tracks where the next</text>
+  <text x="60" y="536" font-size="12.5" font-style="italic" fill="#9a9a9a">message lands. Sending advances only the second.</text>
+</svg>

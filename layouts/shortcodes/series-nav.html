@@ -1,0 +1,38 @@
+{{- /* Series cross-reference nav. Auto-discovers every published post sharing
+       the current page's first `series` value, ordered by `series_order`.
+       Display text comes from `series_label` (falls back to the order).
+
+       Optional `data` param names a file under data/ whose `parts` list holds
+       upcoming (not-yet-published) entries. Each upcoming part is rendered grey
+       and italic. A planned entry whose `order` already matches a published
+       post is skipped, so parts light up as links the moment they ship. */ -}}
+{{- $series := index .Page.Params.series 0 -}}
+{{- $current := .Page -}}
+{{- $parts := where site.RegularPages "Params.series" "intersect" (slice $series) -}}
+{{- $parts = sort $parts ".Params.series_order" -}}
+{{- $published := slice -}}
+{{- range $parts }}{{ $published = $published | append .Params.series_order }}{{ end -}}
+{{- $upcoming := slice -}}
+{{- with .Get "data" -}}
+  {{- with index hugo.Data . -}}
+    {{- range .parts -}}
+      {{- if not (in $published .order) -}}{{ $upcoming = $upcoming | append . }}{{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+<aside class="series-nav" aria-label="Series navigation">
+  <div class="series-nav-title">{{ $series }}</div>
+  <ul class="series-nav-list">
+  {{- range $parts -}}
+    {{- $label := .Params.series_label | default (printf "Part %v" .Params.series_order) -}}
+    {{- if eq .Permalink $current.Permalink -}}
+      <li class="series-nav-current" aria-current="true"><span class="series-nav-part">{{ $label }}:</span> {{ .Title }}<span class="series-nav-here">you are here</span></li>
+    {{- else -}}
+      <li><a href="{{ .Permalink }}"><span class="series-nav-part">{{ $label }}:</span> {{ .Title }}</a></li>
+    {{- end -}}
+  {{- end -}}
+  {{- range $upcoming -}}
+    <li class="series-nav-upcoming"><span class="series-nav-part">{{ .label }}{{ with .title }}:{{ end }}</span>{{ with .title }} {{ . }}{{ end }}<span class="series-nav-soon">coming soon</span></li>
+  {{- end -}}
+  </ul>
+</aside>

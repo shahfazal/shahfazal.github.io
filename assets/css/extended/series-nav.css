@@ -1,0 +1,58 @@
+.series-nav {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--entry);
+    padding: 14px 18px;
+    margin: 24px 0 32px;
+    font-size: 0.95rem;
+}
+
+.series-nav-title {
+    font-weight: 700;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--secondary);
+    margin-bottom: 8px;
+}
+
+.series-nav-list {
+    margin: 0;
+    padding-left: 0;
+    list-style: none;
+}
+
+.series-nav-list li {
+    margin: 4px 0;
+}
+
+.series-nav-upcoming {
+    color: var(--secondary);
+    font-style: italic;
+    opacity: 0.75;
+}
+
+.series-nav-soon {
+    font-size: 0.72rem;
+    font-style: italic;
+    letter-spacing: 0.04em;
+    margin-left: 8px;
+    white-space: nowrap;
+}
+
+.series-nav-part {
+    font-weight: 600;
+}
+
+.series-nav-current {
+    color: var(--primary);
+}
+
+.series-nav-here {
+    font-size: 0.72rem;
+    font-style: italic;
+    letter-spacing: 0.04em;
+    color: var(--secondary);
+    margin-left: 8px;
+    white-space: nowrap;
+}

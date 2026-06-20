@@ -1,0 +1,5 @@
+{{- /* Medium-style standout pull quote. Distinct class so it does not affect
+       plain `>` blockquotes (e.g. the haiku epigraphs). */ -}}
+<blockquote class="pullquote">
+{{ .Inner | markdownify }}
+</blockquote>

@@ -1,0 +1,12 @@
+# Planned CodeHaiku series parts not yet published.
+# An entry is shown grey + italic ("coming soon") in the series-nav until a post
+# with the matching `order` (series_order) is published, at which point it
+# auto-links and this entry is skipped. Keep titles in sync with the post's
+# real title so the placeholder reads the same as the eventual link.
+parts:
+  - order: 3
+    label: "Part 3"
+    title: "When the Counter Couldn't Count Itself"
+  - order: 4
+    label: "Part 4"
+    title: "When the Eval Kept Taking Jobs"

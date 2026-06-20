@@ -1,0 +1,28 @@
+{{- /* Plain series list for a project/index page. Published parts (built and
+       live) render as dated links; not-yet-live parts come from the `data`
+       roster and render as "coming soon". Self-heals as future-dated posts go
+       live: each "coming soon" becomes a link on the next build, no edit.
+
+       Usage: {{< series-list series="Series name" data="codehaiku" >}} */ -}}
+{{- $series := .Get "series" -}}
+{{- $parts := where site.RegularPages "Params.series" "intersect" (slice $series) -}}
+{{- $parts = sort $parts ".Params.series_order" -}}
+{{- $published := slice -}}
+{{- range $parts }}{{ $published = $published | append .Params.series_order }}{{ end -}}
+{{- $upcoming := slice -}}
+{{- with .Get "data" -}}
+  {{- with index hugo.Data . -}}
+    {{- range .parts -}}
+      {{- if not (in $published .order) -}}{{ $upcoming = $upcoming | append . }}{{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+<ul>
+{{- range $parts -}}
+  {{- $label := .Params.series_label | default (printf "Part %v" .Params.series_order) -}}
+  <li><a href="{{ .Permalink }}">{{ $label }}: {{ .Title }}</a> ({{ .Date.Format "January 2006" }})</li>
+{{- end -}}
+{{- range $upcoming -}}
+  <li>{{ .label }}{{ with .title }}: {{ . }}{{ end }} <em>(coming soon)</em></li>
+{{- end -}}
+</ul>

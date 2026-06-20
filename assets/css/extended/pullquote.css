@@ -1,0 +1,28 @@
+/* Medium-style standout pull quote, centered/borderless variant. Scoped to
+   .pullquote so it overrides the theme's default blockquote without touching
+   plain `>` blockquotes (e.g. the haiku epigraphs). */
+.post-content blockquote.pullquote {
+    border: none;
+    margin: 2.4rem auto;
+    padding: 0;
+    max-width: 90%;
+    text-align: center;
+    font-size: 1.5rem;
+    line-height: 1.5;
+    font-style: italic;
+    color: var(--content);
+}
+
+.post-content blockquote.pullquote p {
+    margin: 0;
+}
+
+@media print {
+    .post-content blockquote.pullquote {
+        font-size: 12pt !important;
+        text-align: center;
+        font-style: italic;
+        border: none !important;
+        margin: 0.6rem auto !important;
+    }
+}

@@ -2,7 +2,7 @@
 title: "When the Eval Kept Taking Jobs"
 description: "The counter went from scoring to teaching to curating in three days. Three roles, three failure modes, one diagnostic instrument that was quietly under-reporting."
 summary: "CodeHaiku: Part 4 of 4. This is where it all ends. Or begins?"
-date: 2026-06-23
+date: 2026-06-24
 draft: false
 tags: ["evals", "fine-tuning", "lgtm-575", "codehaiku"]
 series: ["PR Reviews in Haiku, and the Eval That Mattered More"]

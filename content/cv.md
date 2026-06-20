@@ -6,6 +6,22 @@ hidemeta: true
 comments: false
 ---
 
+<!--
+EDITING THIS FILE (e.g. in a Claude web session): edit the CV content only.
+Hard constraints, do not violate:
+- Keep the YAML frontmatter (--- ... ---) above exactly as-is.
+- Keep the <div class="cv-contact"> ... </div> block below exactly as-is,
+  including the "Download PDF" link to /cv.pdf and all class names. print.css
+  targets those class names to flatten contacts and hide the button in the PDF.
+- Heading hierarchy is load-bearing: ## = sections, ### = roles,
+  **bold** = sub-group headers. Do not promote/demote levels; the print
+  stylesheet styles each level differently (hairline rules, page breaks).
+- No em dashes and no emojis anywhere. Use "·" or "to" as separators,
+  matching the existing text (e.g. "April 2011 to Present").
+- This is the canonical source: shahfazal.com/cv and /cv.pdf both regenerate
+  from this file on deploy. Return the complete file, ready to overwrite verbatim.
+-->
+
 _Lead Software Engineer · Eval-gelist · Learning and Building in Public_
 
 <div class="cv-contact">
@@ -36,18 +52,17 @@ _April 2011 to Present · New York_
 
 **AI Tooling & Agent Evals**
 
-- **Skillomatic (internal eval harness):** Built end-to-end eval harness for Salesforce AI skills and agents. Observe-mode capture, generate-mode case proposal, LLM-as-judge evaluation, regression test loop. Used internally to validate skill and agent behavior across deployments.
-- **Claude Skill eval framework with token optimization:** Built eval harness for a bug-investigation skill, validating its tool-call shape (parameter envelopes, context limits, banned terms) rather than the model's prose output. This framework helped reduce token usage by 85% (115K to 14K in benchmark case). Python stdlib only, zero dependencies.
-- **Ops automation agents:** Built deflection agent for automated PagerDuty response (eliminating manual intervention on 4-5 alerts/day) and continuous SLO compliance monitor for 8+ services (replacing ~2.5 hours/day of manual dashboard checks across the team).
-- **Visual Analyzer for Messaging Sessions:** Built tool converting Splunk logs into entity-flow diagrams, enabling Support and CCE teams to isolate root causes faster than parsing raw logs.
+- **Skillomatic (internal eval harness):** Built end-to-end eval harness for Salesforce AI skills and agents: observe-mode capture, generate-mode case proposal, LLM-as-judge evaluation, regression loop. Used internally to validate skill and agent behavior across deployments.
+- **Claude Skill eval framework with token optimization:** Built eval harness for a bug-investigation skill validating tool-call shape (parameter envelopes, context limits, banned terms) rather than model prose. Reduced token usage 85% (115K to 14K in benchmark). Python stdlib only, zero dependencies.
+- **Ops automation agents:** Built PagerDuty deflection agent eliminating manual intervention on 4-5 alerts/day, and continuous SLO compliance monitor for 8+ services replacing ~2.5 hours/day of dashboard checks across the team.
 
 **Omni-Channel (Service Cloud) · Lead Developer (2021 to Present)**
 
-- Leading Enhanced Omni-Channel for Salesforce on Alibaba Cloud (China data-residency requirements); designed Org Migration for Hyperforce (cross-instance customer data migration APIs); led Omni-Channel Home and Raise Flag features (centralized configuration empowering partner teams).
+- Lead on Enhanced Omni-Channel for Alibaba Cloud (China data-residency), Org Migration for Hyperforce (cross-instance customer data migration APIs), and centralized configuration features (Omni-Channel Home, Raise Flag).
 
 **Einstein Bots (Chatbot Integrations) · Lead Developer (2018 to 2021)**
 
-- Founding member of Chatbot Integrations and Analytics. Built core integrations between Salesforce Core and Chatbot Runtime; established Functional Integration Testing (FIT) framework. Work fed forward into Agentforce.
+- Founding member of Chatbot Integrations and Analytics. Built core Salesforce Core to Chatbot Runtime integrations and the Functional Integration Testing (FIT) framework. Work fed forward into Agentforce.
 
 **Service Cloud · Lead & Senior Quality Engineer (2011 to 2018)**
 
@@ -57,17 +72,16 @@ _April 2011 to Present · New York_
 
 _July 2004 to April 2011 · San Francisco Bay Area_
 
-- Progressed from intern to Staff Engineer across Test, Quality, and Client Technical Resolution. Specialized in Java performance analysis and SOA implementations (BPEL, SCA, ESB). Multiple IBM BRAVO Awards.
+- Progressed intern to Staff across Test, Quality, and Client Technical Resolution. Specialized in Java performance analysis and SOA implementations (BPEL, SCA, ESB).
 
 ## Public Projects & Open Source
 
 ### CodeHaiku · PR Reviews in Haiku (June 2026)
 
-[GitHub](https://github.com/shahfazal/lgtm-575) · [Project page](/projects/codehaiku/) · [Writeup (Part 1 of 4)](/posts/the-eval-before-the-model/)
+[GitHub](https://github.com/shahfazal/lgtm-575) · [Project page](/projects/codehaiku/) · [Writeup](/posts/the-eval-before-the-model/)
 
-- Eval-first fine-tuning methodology, applied to a Gemma 4 E4B fine-tune that writes PR review comments as 5-7-5 haiku. Built the eval harness before any training. Used the same harness to curate training data and to gate the teacher loop.
-- Deterministic syllable checker (pyphen with snake_case decomposition, acronym overrides, and low-confidence flags) catches form failures that loss curves cannot see. Generate-check-revise loop wrapped around Qwen3-30B-A3B teacher; converged 7 of 20 outright on the probe set, remaining cases land within one syllable per line of valid.
-- Four-part blog series documenting the methodology. Part 1 shipped June 2026; Parts 2-4 in progress. Open source, MIT.
+- Eval-first fine-tuning methodology applied to a Gemma 4 E4B fine-tune that writes PR review comments as 5-7-5 haiku. Built the eval harness before any training; used the same harness to curate training data and gate a generate-check-revise loop around a Qwen3-30B-A3B teacher. Deterministic syllable checker (pyphen with snake_case decomposition, acronym overrides, low-confidence flags) catches form failures that loss curves cannot see.
+- Scored v0.1 against a base-model floor and three golden numbers committed before training (bench-drop discipline): 5-7-5 form did not improve significantly (McNemar p=0.167), while relevance and category cleared their pre-set targets. Four-part blog series documenting the methodology and the audit of the eval itself. Open source, MIT.
 
 ### CivicInsight · Kaggle Gemma 4 Good Hackathon (May 2026)
 
@@ -80,8 +94,8 @@ _July 2004 to April 2011 · San Francisco Bay Area_
 
 [GitHub](https://github.com/shahfazal/claudio) · [Project page](/projects/claudio/)
 
-- Open-source observability tool for Claude Code: five shipped versions covering session browser, memory browser, compaction analysis, resilience (health checks, graceful degradation), and a D3-based stats dashboard.
-- Stack: Python, Flask, Jinja2, D3.js, pytest. MIT licensed, fully local, zero network calls. Cost-estimation via token counts and per-model pricing.
+- Open-source observability tool for Claude Code, seven shipped versions through v0.7.0. Headline feature is a durable session store with background sync that mirrors live sessions into a persistent archive, protecting history against Claude Code's retention sweeps. Earlier versions add memory browser, compaction analysis, resilience layer (health checks, graceful degradation), D3 stats dashboard, and guided help tour.
+- Stack: Python, Flask, Jinja2, D3.js, pytest. MIT licensed, fully local, zero network calls. Cost estimation via token counts and per-model pricing.
 
 ### Élections Municipales 2026 · French Open Data
 
@@ -93,11 +107,12 @@ _July 2004 to April 2011 · San Francisco Bay Area_
 
 [GitHub](https://github.com/datagouv/datagouv-mcp)
 
-- **[#100](https://github.com/datagouv/datagouv-mcp/pull/100) (merged):** Contributed a deep-health-check endpoint exercising the full MCP handshake plus a real tool call. Catches integration failures that surface-level health checks miss. Plus a CLI dev script collapsing a three-curl integration test into a single command, improving maintainer ergonomics. First merged PR on French government open-source infrastructure.
-- **[#115](https://github.com/datagouv/datagouv-mcp/pull/115) (merged):** Found and fixed a correctness bug where search_datasets reported the same resource count for every result: the v2 API returns the resources field as a metadata link object rather than a list, so the client was counting the wrong thing. Diagnosed against the live API, locked with a regression test, and verified end-to-end through the MCP tool loop. Shipped in release 0.2.26.
+- **[#100](https://github.com/datagouv/datagouv-mcp/pull/100) (merged):** Deep-health-check endpoint exercising the full MCP handshake plus a real tool call, catching integration failures that surface-level checks miss. CLI dev script collapsing a three-curl integration test into a single command, improving maintainer ergonomics. First merged PR on French government open-source infrastructure.
+- **[#115](https://github.com/datagouv/datagouv-mcp/pull/115) (merged):** Found and fixed a correctness bug in search_datasets where every result reported the same resource count: the v2 API returns the resources field as a metadata link object rather than a list, so the client was counting the wrong thing. Diagnosed against the live API, locked with a regression test, verified end-to-end through the MCP tool loop. Shipped in release 0.2.26.
 
 ## Writing
 
+- [PR Reviews in Haiku, and the Eval That Mattered More](/posts/the-eval-before-the-model/) (June 2026). Four-part CodeHaiku writeup on building the eval before the model, auditing the eval against itself, and what format-constrained generation reveals that loss curves cannot see.
 - [Trained in America, Wrong in Paris](/posts/trained-in-america-wrong-in-paris/) (May 2026). Empirical study of LLM pretraining priors on civic data visualizations. Tested five frontier models against the same Paris election choropleth; found systematic US-bias substitution across the field.
 - [Engineering for Systems That Lie](/posts/engineering-for-systems-that-lie/) (May 2026). CivicInsight retrospective on fine-tuning, verification, and what 61 examples can and cannot teach a model.
 - [Nobody Tests the Steering Wheel](/posts/nobody-tests-the-steering-wheel/) (2026). Methodology piece on prompt and skill evaluation. The conceptual precursor to the verification work above.

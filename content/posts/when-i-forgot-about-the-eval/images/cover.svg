@@ -1,0 +1,73 @@
+<svg width="100%" viewBox="0 0 800 440" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" role="img" aria-labelledby="cover-title cover-desc">
+<title id="cover-title">Three haikus a frontier model read and called fully intact</title>
+<desc id="cover-desc">A dumbbell chart on a warm cream background. For three haikus the model called fully intact, relevance to the source review drops from draft to final after the form loop. Haiku 1: 0.77 to 0.52. Haiku 4: 0.60 to 0.44. Haiku 10: 0.01 to minus 0.05, falling below the dashed shuffle-floor line at 0.091, meaning less overlap with its source review than a random mismatched pairing. All three dropped.</desc>
+
+<style>
+  .bg     { fill: #f0eee8; }
+  .title  { font: 500 25px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #2b2926; letter-spacing: -0.01em; }
+  .sub    { font: 400 15px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #6b6862; }
+  .rowlab { font: 400 14px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #6b6862; }
+  .vfin   { font: 600 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #b05a44; }
+  .vdraft { font: 400 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #8a8276; }
+  .tick   { font: 400 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #8a8276; }
+  .axt    { font: 400 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #6b6862; }
+  .floor  { font: 400 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #b0822f; }
+  .anno   { font: italic 400 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #b05a44; }
+  .foot   { font: 400 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #9a948a; }
+  .axis   { stroke: #d8d4ca; stroke-width: 1; }
+  .conn   { stroke: #b05a44; stroke-width: 2; }
+  .fline  { stroke: #b0822f; stroke-width: 1.5; stroke-dasharray: 4 4; }
+  .lead   { stroke: #c9a08e; stroke-width: 1; }
+  .ddraft { fill: #b0a99c; }
+  .dfinal { fill: #b05a44; }
+</style>
+
+<rect width="800" height="440" class="bg"/>
+
+<text x="400" y="42" class="title" text-anchor="middle">Three haikus a model read and called &#8220;fully intact&#8221;</text>
+<text x="400" y="68" class="sub" text-anchor="middle">Relevance to the source review, before and after the form loop. All three dropped.</text>
+
+<!-- x axis -->
+<line x1="150" y1="358" x2="720" y2="358" class="axis"/>
+<text x="213" y="374" class="tick" text-anchor="middle">0.0</text>
+<text x="340" y="374" class="tick" text-anchor="middle">0.2</text>
+<text x="466" y="374" class="tick" text-anchor="middle">0.4</text>
+<text x="593" y="374" class="tick" text-anchor="middle">0.6</text>
+<text x="720" y="374" class="tick" text-anchor="middle">0.8</text>
+<text x="435" y="394" class="axt" text-anchor="middle">relevance to the source review (metric #3 cosine)</text>
+
+<!-- shuffle floor -->
+<line x1="271" y1="150" x2="271" y2="350" class="fline"/>
+<text x="271" y="143" class="floor" text-anchor="middle">shuffle floor 0.091</text>
+
+<!-- haiku 1: 0.77 -> 0.52 -->
+<text x="125" y="179" class="rowlab" text-anchor="end">haiku 1</text>
+<line x1="543" y1="175" x2="701" y2="175" class="conn"/>
+<circle cx="701" cy="175" r="6" class="ddraft"/>
+<circle cx="543" cy="175" r="6" class="dfinal"/>
+<text x="715" y="179" class="vdraft" text-anchor="start">draft 0.77</text>
+<text x="543" y="161" class="vfin" text-anchor="middle">final 0.52</text>
+
+<!-- haiku 4: 0.60 -> 0.44 -->
+<text x="125" y="249" class="rowlab" text-anchor="end">haiku 4</text>
+<line x1="492" y1="245" x2="593" y2="245" class="conn"/>
+<circle cx="593" cy="245" r="6" class="ddraft"/>
+<circle cx="492" cy="245" r="6" class="dfinal"/>
+<text x="607" y="249" class="vdraft" text-anchor="start">draft 0.60</text>
+<text x="492" y="231" class="vfin" text-anchor="middle">final 0.44</text>
+
+<!-- haiku 10: 0.01 -> -0.05 (below floor) -->
+<text x="125" y="319" class="rowlab" text-anchor="end">haiku 10</text>
+<line x1="182" y1="315" x2="220" y2="315" class="conn"/>
+<circle cx="220" cy="315" r="6" class="ddraft"/>
+<circle cx="182" cy="315" r="6" class="dfinal"/>
+<text x="174" y="319" class="vfin" text-anchor="end">-0.05</text>
+<text x="228" y="319" class="vdraft" text-anchor="start">0.01</text>
+
+<!-- annotation on haiku 10 -->
+<line x1="326" y1="336" x2="188" y2="318" class="lead"/>
+<text x="330" y="333" class="anno" text-anchor="start">below the shuffle floor: less overlap with its</text>
+<text x="330" y="347" class="anno" text-anchor="start">source review than a random mismatched pairing</text>
+
+<text x="400" y="424" class="foot" text-anchor="middle">v1 teacher loop, probe haikus 1, 4, 10 (Qwen3-30B-A3B). Eyeballed as intact, measured as dropped.</text>
+</svg>

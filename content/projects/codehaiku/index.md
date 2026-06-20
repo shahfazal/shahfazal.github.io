@@ -21,7 +21,4 @@ where the eval harness is the primary deliverable.
 
 ## Blog series
 
-- [Part 1: The Eval Before the Model](/posts/the-eval-before-the-model/) (June 2026)
-- Part 2: When the eval became the analyst, and the analyst was wrong (in progress)
-- Part 3: When the analyst got audited (in progress)
-- Part 4: The structural ceiling, and reasoning's bet (in progress)
+{{< series-list series="PR Reviews in Haiku, and the Eval That Mattered More" data="codehaiku" >}}

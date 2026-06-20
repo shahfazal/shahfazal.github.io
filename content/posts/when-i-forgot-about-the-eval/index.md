@@ -6,15 +6,20 @@ draft: false
 tags: ["evals", "fine-tuning", "codehaiku"]
 series: ["PR Reviews in Haiku, and the Eval That Mattered More"]
 series_order: 2
+series_label: "Part 2"
 cover:
-  image: "images/part2_fully_intact.png"
-  alt: "Chart showing three haikus the model called 'fully intact' all dropping in measured relevance after the form loop, one below the random-pairing floor."
+  image: "images/cover.svg"
+  alt: "Dumbbell chart titled 'Three haikus a model read and called fully intact.' Relevance to the source review drops from draft to final for all three: haiku 1 from 0.77 to 0.52, haiku 4 from 0.60 to 0.44, haiku 10 from 0.01 to -0.05, which falls below the dashed shuffle-floor line at 0.091."
   relative: true
 ---
 
-> Vibes said yes, it held  
-> Yet another rabbit hole  
-> Cosines disagreed
+{{< series-nav data="codehaiku" >}}
+
+{{< pullquote >}}
+Vibes said yes, it held  
+Yet another rabbit hole  
+Cosines disagreed
+{{< /pullquote >}}
 
 In Part 1, the model could not write a 5-7-5 strict haiku. The deterministic counter was ready to detect one. The loop wrapped the counter around the teacher and converged 7 of 20 outputs outright; the remaining cases landed within one syllable per line of valid, the kind of gap a human can fix by hand.
 
@@ -122,13 +127,17 @@ This is the same pattern the syllable counter has on the form axis. Part 1 intro
 
 Stay tuned.
 
-> Form had its ruler\
-> Content had only my eye\
-> Eyes carry no scale
+---
+
+{{< pullquote >}}
+Form had its ruler\
+Content had only my eye\
+Eyes carry no scale
+{{< /pullquote >}}
 
 ---
 
-_Part 3: When the analyst got audited._
+_Part 3: When the Counter Couldn't Count Itself._
 
 _Code, model, and training pairs: github.com/shahfazal/lgtm-575_
 

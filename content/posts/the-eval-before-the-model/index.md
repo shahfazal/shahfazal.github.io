@@ -3,17 +3,24 @@ title: "The Eval Before the Model"
 date: 2026-06-09
 draft: false
 tags: ["ai", "llm", "evaluation", "fine-tuning", "haiku", "codehaiku"]
+series: ["PR Reviews in Haiku, and the Eval That Mattered More"]
+series_order: 1
+series_label: "Part 1"
 description: "Part 1 of 4 in the series PR Reviews in Haiku, and the Eval That Mattered More"
 summary: "Before any training a model to output haikus, I built the eval. I ran a 30-billion-parameter teacher against it. Zero of twenty outputs were valid 5-7-5 haikus. This is what the eval taught me."
 cover:
-  image: "images/row_17_oscillation.png"
-  alt: "line graph of the syllable count of a haiku oscillating"
+  image: "images/cover.svg"
+  alt: "Line chart titled 'A 30B model trying to write a 5-7-5 haiku.' Syllables per line across four revisions: Line 2 falls from 11 to 7 and Line 3 from 9 to 5, both converging to target, while Line 1 oscillates between 6 and 4 and never lands on 5."
   relative: true
 ---
 
-> Stones forget themselves  
-> Mountains grind away to dust  
-> Before long, silence
+{{< series-nav data="codehaiku" >}}
+
+{{< pullquote >}}
+Stones forget themselves  
+Mountains grind away to dust  
+Before long, silence
+{{< /pullquote >}}
 
 Now imagine code reviews written in this form, in haiku.
 
@@ -84,7 +91,7 @@ class LineCount:
     low_confidence: list = field(default_factory=list)
 ```
 
-Any token that is not `snake_case`, not in the override table, and not a known English word ends up in `low_confidence`. So, with the counter itself, I'm starting to get an idea of the quality of the haiku. (A subtle wrinkle here: the `snake_case` branch does not consult the acronym table either. `api_key` counts as 2, not 4. I will come back to this in a later post.)
+Any token that is not `snake_case`, not in the override table, and not a known English word ends up in `low_confidence`. So, with the counter itself, I'm starting to get an idea of the quality of the haiku. (~A subtle wrinkle here: the `snake_case` branch does not consult the acronym table either. `api_key` counts as 2, not 4. I will come back to this in a later post.~ Update June 18, 2026: this was resolved with a measured-blast-radius audit; see Part 3a.)
 
 ## Zero of twenty
 
@@ -224,13 +231,15 @@ The next thing the model decided to do, of course, was to get content wrong whil
 
 ---
 
-> Lost, the models are  
-> Narrow the art is mostly  
-> tokens not meter
+{{< pullquote >}}
+Lost, the models are  
+Narrow the art is mostly  
+tokens not meter
+{{< /pullquote >}}
 
 ---
 
-_Part 2: When the eval became the analyst, and the analyst was wrong._
+_Part 2: The moment I almost failed my own eval._
 
 _Both haiku composed by yours-truly for this post. Apologies to actual haiku poets._
 

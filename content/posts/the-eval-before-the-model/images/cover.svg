@@ -1,0 +1,91 @@
+<svg width="100%" viewBox="0 0 800 440" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" role="img" aria-labelledby="cover-title cover-desc">
+<title id="cover-title">A 30B model trying to write a 5-7-5 haiku</title>
+<desc id="cover-desc">A line chart on a warm cream background. Syllables per line across four revisions of one haiku. Line 2 falls from 11 to 7 and Line 3 from 9 to 5, both converging to target. Line 1 oscillates between 6 and 4 and never lands on 5, an off-by-one that does not close. Dashed reference lines mark the targets of 5 and 7.</desc>
+
+<style>
+  .bg     { fill: #f0eee8; }
+  .title  { font: 500 25px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #2b2926; letter-spacing: -0.01em; }
+  .sub    { font: 400 15px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #6b6862; }
+  .tick   { font: 400 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #8a8276; }
+  .axt    { font: 400 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #6b6862; }
+  .tgt    { font: 400 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #b0822f; }
+  .leg    { font: 400 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #2b2926; }
+  .anno   { font: italic 400 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #b05a44; }
+  .foot   { font: 400 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #9a948a; }
+  .axis   { stroke: #d8d4ca; stroke-width: 1; }
+  .tline  { stroke: #b0822f; stroke-width: 1.5; stroke-dasharray: 4 4; }
+  .l1     { stroke: #b05a44; stroke-width: 2.5; fill: none; }
+  .l2     { stroke: #4f7d78; stroke-width: 2.5; fill: none; }
+  .l3     { stroke: #6f8f4a; stroke-width: 2.5; fill: none; }
+  .m1     { fill: #b05a44; }
+  .m2     { fill: #4f7d78; }
+  .m3     { fill: #6f8f4a; }
+  .lead   { stroke: #b05a44; stroke-width: 1; }
+</style>
+
+<rect width="800" height="440" class="bg"/>
+
+<text x="400" y="40" class="title" text-anchor="middle">A 30B model trying to write a 5-7-5 haiku</text>
+<text x="400" y="66" class="sub" text-anchor="middle">Syllables per line across four revisions. Line 1 never lands on 5.</text>
+
+<!-- axes -->
+<line x1="85" y1="95" x2="85" y2="360" class="axis"/>
+<line x1="85" y1="360" x2="620" y2="360" class="axis"/>
+<text x="32" y="227" transform="rotate(-90 32 227)" class="axt" text-anchor="middle">syllables</text>
+<text x="72" y="364" class="tick" text-anchor="end">0</text>
+<text x="72" y="320" class="tick" text-anchor="end">2</text>
+<text x="72" y="276" class="tick" text-anchor="end">4</text>
+<text x="72" y="231" class="tick" text-anchor="end">6</text>
+<text x="72" y="187" class="tick" text-anchor="end">8</text>
+<text x="72" y="143" class="tick" text-anchor="end">10</text>
+<text x="72" y="99" class="tick" text-anchor="end">12</text>
+
+<!-- target reference lines -->
+<line x1="85" y1="205.4" x2="620" y2="205.4" class="tline"/>
+<text x="624" y="209" class="tgt" text-anchor="start">target 7</text>
+<line x1="85" y1="249.6" x2="620" y2="249.6" class="tline"/>
+<text x="624" y="253" class="tgt" text-anchor="start">target 5</text>
+
+<!-- x labels -->
+<text x="140" y="380" class="tick" text-anchor="middle">draft</text>
+<text x="287" y="380" class="tick" text-anchor="middle">rev 1</text>
+<text x="433" y="380" class="tick" text-anchor="middle">rev 2</text>
+<text x="580" y="380" class="tick" text-anchor="middle">rev 3</text>
+<text x="360" y="400" class="axt" text-anchor="middle">feedback round</text>
+
+<!-- Line 2 (target 7), squares -->
+<polyline class="l2" points="140,117.1 287,139.2 433,183.3 580,205.4"/>
+<rect x="136" y="113.1" width="8" height="8" class="m2"/>
+<rect x="283" y="135.2" width="8" height="8" class="m2"/>
+<rect x="429" y="179.3" width="8" height="8" class="m2"/>
+<rect x="576" y="201.4" width="8" height="8" class="m2"/>
+
+<!-- Line 3 (target 5), triangles -->
+<polyline class="l3" points="140,161.3 287,249.6 433,249.6 580,249.6"/>
+<polygon class="m3" points="140,156 145,165 135,165"/>
+<polygon class="m3" points="287,244.6 292,253.6 282,253.6"/>
+<polygon class="m3" points="433,244.6 438,253.6 428,253.6"/>
+<polygon class="m3" points="580,244.6 585,253.6 575,253.6"/>
+
+<!-- Line 1 (target 5), circles, the oscillator -->
+<polyline class="l1" points="140,227.5 287,271.7 433,227.5 580,271.7"/>
+<circle cx="140" cy="227.5" r="5" class="m1"/>
+<circle cx="287" cy="271.7" r="5" class="m1"/>
+<circle cx="433" cy="227.5" r="5" class="m1"/>
+<circle cx="580" cy="271.7" r="5" class="m1"/>
+
+<!-- annotation on Line 1 rev 1 (value 4) -->
+<line x1="296" y1="330" x2="290" y2="278" class="lead"/>
+<text x="300" y="330" class="anno" text-anchor="start">off-by-one oscillation:</text>
+<text x="300" y="344" class="anno" text-anchor="start">bounces 4 and 6, never closes</text>
+
+<!-- legend -->
+<circle cx="465" cy="110" r="5" class="m1"/>
+<text x="480" y="114" class="leg" text-anchor="start">Line 1 (target 5)</text>
+<rect x="461" y="124" width="8" height="8" class="m2"/>
+<text x="480" y="132" class="leg" text-anchor="start">Line 2 (target 7)</text>
+<polygon class="m3" points="465,141 470,150 460,150"/>
+<text x="480" y="150" class="leg" text-anchor="start">Line 3 (target 5)</text>
+
+<text x="400" y="424" class="foot" text-anchor="middle">Probe row 17, teacher loop on Qwen3-30B-A3B. Greedy decoding, max 3 revisions.</text>
+</svg>

@@ -1,0 +1,33 @@
+<svg width="100%" viewBox="0 0 800 440" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" role="img" aria-labelledby="cover-title cover-desc">
+<title id="cover-title">What 20 rows hid that 200 did not</title>
+<desc id="cover-desc">A bar chart on a dark background. A tiny bar labeled 1, for the 20-row probe, sits beside a tall amber bar labeled 23, for the 200-row pool. The same counter bug flipped one syllable-validity verdict on the small probe but twenty-three on the full pass. Footnote: 118 lines disagreed; 94 of 200 haiku touched.</desc>
+
+<style>
+  .bg       { fill: #1a1a1a; }
+  .title    { font: 500 30px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #f0eee8; letter-spacing: -0.01em; }
+  .sub      { font: 400 16px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #b4b2a9; }
+  .count    { font: 600 26px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #f0eee8; }
+  .label    { font: 400 15px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #b4b2a9; letter-spacing: 0.02em; }
+  .foot     { font: 400 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #6b6862; }
+  .bar-hid  { fill: #6b6862; }
+  .bar-seen { fill: #c9a96e; }
+  .axis     { stroke: #3a3a38; stroke-width: 1; }
+</style>
+
+<rect width="800" height="440" class="bg"/>
+
+<text x="400" y="72" class="title" text-anchor="middle">What 20 rows hid that 200 didn&#8217;t</text>
+<text x="400" y="104" class="sub" text-anchor="middle">Syllable-validity verdicts the counter fix flipped</text>
+
+<line x1="180" y1="372" x2="620" y2="372" class="axis"/>
+
+<rect x="240" y="362" width="100" height="10" class="bar-hid"/>
+<text x="290" y="350" class="count" text-anchor="middle">1</text>
+<text x="290" y="398" class="label" text-anchor="middle">20-row probe</text>
+
+<rect x="460" y="142" width="100" height="230" class="bar-seen"/>
+<text x="510" y="130" class="count" text-anchor="middle">23</text>
+<text x="510" y="398" class="label" text-anchor="middle">200-row pool</text>
+
+<text x="400" y="424" class="foot" text-anchor="middle">Same counter bug. 118 lines disagreed; 94 of 200 haiku touched.</text>
+</svg>

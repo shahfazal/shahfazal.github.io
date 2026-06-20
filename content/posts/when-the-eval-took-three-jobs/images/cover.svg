@@ -1,0 +1,67 @@
+<svg width="100%" viewBox="0 0 800 440" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" role="img" aria-labelledby="cover-title cover-desc">
+<title id="cover-title">The verdict: v0.1 against the base floor</title>
+<desc id="cover-desc">Three small bar-pair panels comparing the base model floor to the v0.1 fine-tune, against golden-number targets committed before training. Form: 14 percent to 7 percent, a miss below the 45 percent target, regressed. Relevance: 0.321 to 0.394, a hit clearing the 0.37 target. Category macro-F1: 0.319 to 0.458, a hit holding the committed gap. One miss, two hits. Held-out 100; the form change is not statistically significant, McNemar p equals 0.167.</desc>
+
+<style>
+  .bg     { fill: #1a1a1a; }
+  .title  { font: 500 28px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #f0eee8; letter-spacing: -0.01em; }
+  .sub    { font: 400 15px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #b4b2a9; }
+  .metric { font: 500 16px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #f0eee8; }
+  .verH   { font: 600 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #7fa86a; letter-spacing: 0.14em; }
+  .verM   { font: 600 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #c4705a; letter-spacing: 0.14em; }
+  .val    { font: 500 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #f0eee8; }
+  .blabel { font: 400 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #b4b2a9; }
+  .gold   { font: 400 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #c9a96e; }
+  .foot   { font: 400 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: #6b6862; }
+  .base   { fill: #6b6862; }
+  .hit    { fill: #7fa86a; }
+  .miss   { fill: #c4705a; }
+  .axis   { stroke: #3a3a38; stroke-width: 1; }
+  .gline  { stroke: #c9a96e; stroke-width: 1.5; stroke-dasharray: 4 4; }
+</style>
+
+<rect width="800" height="440" class="bg"/>
+
+<text x="400" y="58" class="title" text-anchor="middle">The verdict: v0.1 against the base floor</text>
+<text x="400" y="86" class="sub" text-anchor="middle">Golden numbers committed before training. One miss, two hits.</text>
+
+<line x1="60" y1="372" x2="740" y2="372" class="axis"/>
+
+<!-- Form: MISS (regressed, far below 45% target) -->
+<text x="152" y="116" class="metric" text-anchor="middle">Form</text>
+<text x="152" y="134" class="verM" text-anchor="middle">MISS</text>
+<line x1="76" y1="174" x2="228" y2="174" class="gline"/>
+<text x="232" y="178" class="gold">&#8805;45%</text>
+<rect x="100" y="310" width="44" height="62" class="base"/>
+<rect x="160" y="341" width="44" height="31" class="miss"/>
+<text x="122" y="302" class="val" text-anchor="middle">14%</text>
+<text x="182" y="333" class="val" text-anchor="middle">7%</text>
+<text x="122" y="390" class="blabel" text-anchor="middle">base</text>
+<text x="182" y="390" class="blabel" text-anchor="middle">v0.1</text>
+
+<!-- Relevance: HIT (clears 0.37) -->
+<text x="400" y="116" class="metric" text-anchor="middle">Relevance</text>
+<text x="400" y="134" class="verH" text-anchor="middle">HIT</text>
+<line x1="324" y1="209" x2="476" y2="209" class="gline"/>
+<text x="480" y="213" class="gold">&#8805;0.37</text>
+<rect x="348" y="231" width="44" height="141" class="base"/>
+<rect x="408" y="199" width="44" height="173" class="hit"/>
+<text x="370" y="223" class="val" text-anchor="middle">0.321</text>
+<text x="430" y="191" class="val" text-anchor="middle">0.394</text>
+<text x="370" y="390" class="blabel" text-anchor="middle">base</text>
+<text x="430" y="390" class="blabel" text-anchor="middle">v0.1</text>
+
+<!-- Category: HIT (holds the committed gap) -->
+<text x="648" y="116" class="metric" text-anchor="middle">Category</text>
+<text x="648" y="134" class="verH" text-anchor="middle">HIT</text>
+<line x1="572" y1="232" x2="724" y2="232" class="gline"/>
+<text x="728" y="236" class="gold">hold gap</text>
+<rect x="596" y="232" width="44" height="140" class="base"/>
+<rect x="656" y="170" width="44" height="202" class="hit"/>
+<text x="618" y="224" class="val" text-anchor="middle">0.319</text>
+<text x="678" y="162" class="val" text-anchor="middle">0.458</text>
+<text x="618" y="390" class="blabel" text-anchor="middle">base</text>
+<text x="678" y="390" class="blabel" text-anchor="middle">v0.1</text>
+
+<text x="400" y="420" class="foot" text-anchor="middle">Held-out 100, same decoding both sides. Form change not significant (McNemar p=0.167).</text>
+</svg>

@@ -1,6 +1,6 @@
 <svg width="100%" viewBox="0 0 800 440" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" role="img" aria-labelledby="card-title card-desc">
 <title id="card-title">CodeHaiku project card</title>
-<desc id="card-desc">CodeHaiku: PR review comments distilled into 5-7-5 haiku. A Gemma 4 E4B fine-tune with an eval-first methodology. Part 1 of 4 shipped, project in progress.</desc>
+<desc id="card-desc">CodeHaiku: PR review comments distilled into 5-7-5 haiku. A Gemma 4 E4B fine-tune with an eval-first methodology. v0.1 shipped, a four-part series.</desc>
 
 <style>
   .bg          { fill: #1a1a1a; }
@@ -46,8 +46,8 @@
 <text x="400" y="358" class="caption" text-anchor="middle">PR review comments in 5&#8201;&#183;&#8201;7&#8201;&#183;&#8201;5 haiku</text>
 
 <g transform="translate(400, 388)">
-  <text x="-12" y="0" class="status status-done" text-anchor="end">PART 1 OF 4 SHIPPED</text>
+  <text x="-12" y="0" class="status status-done" text-anchor="end">v0.1 SHIPPED</text>
   <circle cx="0" cy="-4" r="2" class="dot"/>
-  <text x="12" y="0" class="status status-wip" text-anchor="start">IN PROGRESS</text>
+  <text x="12" y="0" class="status status-wip" text-anchor="start">EVAL-FIRST</text>
 </g>
 </svg>

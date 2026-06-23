@@ -94,7 +94,7 @@ _July 2004 to April 2011 · San Francisco Bay Area_
 
 [GitHub](https://github.com/shahfazal/claudio) · [Project page](/projects/claudio/)
 
-- Open-source observability tool for Claude Code, seven shipped versions through v0.7.0. Headline feature is a durable session store with background sync that mirrors live sessions into a persistent archive, protecting history against Claude Code's retention sweeps. Earlier versions add memory browser, compaction analysis, resilience layer (health checks, graceful degradation), D3 stats dashboard, and guided help tour.
+- Open-source observability tool for Claude Code, eight shipped versions through v0.8.0. Browses and renders full session transcripts from local Claude Code history, with per-session cost, todos, and command history. Headline features are a durable session store with background sync - mirroring live sessions into a persistent archive that protects history against Claude Code's retention sweeps - and full-text search across the archived transcripts. Earlier versions add a memory browser, compaction analysis, a resilience layer (health checks, graceful degradation), a D3 stats dashboard, and a guided help tour.
 - Stack: Python, Flask, Jinja2, D3.js, pytest. MIT licensed, fully local, zero network calls. Cost estimation via token counts and per-model pricing.
 
 ### Élections Municipales 2026 · French Open Data

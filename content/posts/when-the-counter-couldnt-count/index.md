@@ -127,8 +127,6 @@ This post audited the counter as an instrument. There is a second audit undernea
 
 That is the next post: the loop's escalation of the counter into judge, teacher, and curator, and what went wrong at each step.
 
-[Closing haiku placeholder. Directional sketch: the ruler measuring the ruler. Or the punctuation mark that was a syllable. Faz to replace once prose is fresh.]
-
 ---
 
 {{< pullquote >}}

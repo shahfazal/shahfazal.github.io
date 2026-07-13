@@ -1,0 +1,41 @@
+{{- /*
+  Click-to-play video for page bundles. Nothing moves until the reader asks.
+
+  Usage:
+    {{< video src="videos/resolve.mp4" poster="videos/resolve.jpg"
+              alt="Descriptive sentence for screen readers." >}}
+
+  Why not a gif: an auto-playing, infinitely looping animation with no pause control
+  fails WCAG 2.2.2 (Pause, Stop, Hide) for any motion over 5 seconds, and is roughly
+  10x larger. This autoplays nothing and ships native controls.
+
+  The "press play" prompt is baked into the poster image, so it removes itself the
+  moment playback starts. No overlay div, no JS listener, no CSS state machine.
+*/ -}}
+
+{{- $src := .Get "src" -}}
+{{- $poster := .Get "poster" -}}
+{{- $alt := .Get "alt" | default "" -}}
+
+{{- $srcURL := $src -}}
+{{- $vid := .Page.Resources.GetMatch $src -}}
+{{- if $vid }}{{ $srcURL = $vid.RelPermalink }}{{ end -}}
+
+{{- $posterURL := $poster -}}
+{{- $img := .Page.Resources.GetMatch $poster -}}
+{{- if $img }}{{ $posterURL = $img.RelPermalink }}{{ end -}}
+
+<figure style="margin:1.6rem 0;">
+  <video
+    controls
+    loop
+    muted
+    playsinline
+    preload="none"
+    poster="{{ $posterURL }}"
+    aria-label="{{ $alt }}"
+    style="width:100%;height:auto;border-radius:10px;display:block;">
+    <source src="{{ $srcURL }}" type="video/mp4">
+    <p>{{ $alt }} (Your browser does not support the video tag.)</p>
+  </video>
+</figure>

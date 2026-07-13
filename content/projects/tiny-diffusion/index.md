@@ -22,4 +22,4 @@ Built as an evolutive process - generate a dot, then a line then 2 crescent moon
 
 - [Code (GitHub)](https://github.com/shahfazal/tiny-diffusion)
 - [Full write-up](/posts/tiny-diffusion/)
-- [TinyDiffusion model weights]
+- [TinyDiffusion model weights](https://huggingface.co/shahfazal/tiny-diffusion)

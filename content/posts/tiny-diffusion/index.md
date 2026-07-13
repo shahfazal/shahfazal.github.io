@@ -250,7 +250,7 @@ And that's a wrap. Diffusion demystification dealt with. Everything above is 24,
 
 The obvious question is what separates TinyDiffusion from the thing that paints you a zebra.
 
-![Two images generated from the same prompt, side by side. The churches differ: the left is a dim stone parish church with a flagstone aisle, the right a bright vaulted cathedral with a wooden floor. Both are photorealistic, both have a congregation in the pews and stained glass overhead, and both contain an unmistakable zebra in the centre aisle. In neither image is the zebra walking through anything.](images/zebra-church.webp)
+![Two images generated from the same prompt, side by side. The churches differ: the left is a dim stone parish church with a flagstone aisle, the right a bright vaulted cathedral with a wooden floor. Both are photorealistic, both have a congregation in the pews and stained glass overhead, and both contain an unmistakable zebra in the centre aisle.](images/zebra-church.webp)
 
 Five bolt-ons (and with advancing technology, much more than just these five):
 

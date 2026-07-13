@@ -286,6 +286,8 @@ _All images generated through Google Gemini Flash 3.5_
 
 The code is on [GitHub](https://github.com/shahfazal/tiny-diffusion). It is one notebook, and if you have written an MLP before you will read the whole thing in twenty minutes.
 
+The model weights are posted on Huggingface as well - [link](https://huggingface.co/shahfazal/tiny-diffusion)
+
 But the thing I would want you to take is not the code.
 
 It is that when scaled down **there isn't any magic in the box.** There is a small network that got very good at one narrow, boring task, a schedule of numbers that has to actually reach zero, and a loop that runs the boring task a hundred times.

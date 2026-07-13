@@ -246,7 +246,7 @@ The reason is not mysterious once you see it. Cosine keeps more signal alive for
 
 And that's a wrap. Diffusion demystification dealt with. Everything above is 24,450 parameters generating dots on a laptop. The interesting question comes next.
 
-## So what does "A zebra walking through a church need"?
+## So what does a prompt like "A zebra walking through a church" need?
 
 The obvious question is what separates TinyDiffusion from the thing that paints you a zebra.
 
